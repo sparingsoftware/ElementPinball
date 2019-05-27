@@ -50,7 +50,8 @@ import Bumper from './prefabs/Bumper'
 				width: world.bounds.max.x,
 				height: world.bounds.max.y,
 				wireframes: consts.WIREFRAMES,
-				background: consts.COLOR.BACKGROUND
+				// background: consts.COLOR.BACKGROUND
+				background: './src/assets/images/spirala.png'
 			}
 		});
 		Matter.Render.run(render);
