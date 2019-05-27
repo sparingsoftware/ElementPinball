@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/libs/pathseg.js"></script>
+    <title>Element Pinball</title>
+
+    <style>
+      html,
+      body,
+      #game-container {
+        margin: 0;
+        padding: 0;
+      }
+
+      #game-container {
+        min-width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      @import url('https://fonts.googleapis.com/css?family=Hind');
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        color: #dee2e6;
+        background-color: #565960;
+        font-family: 'Hind', sans-serif;
+        text-transform: uppercase;
+      }
+
+      .score {
+        position: absolute;
+        top: 10px;
+        line-height: 1;
+        color: #fb8c60;
+      }
+
+      .score span {
+        font-size: 3.25rem;
+      }
+
+      .current-score {
+        left: 10px;
+      }
+
+      .high-score {
+        text-align: right;
+        right: 10px;
+      }
+
+      canvas {
+        overflow: hidden;
+      }
+
+      .gif-anim {
+        position: absolute;
+        top: 5%;
+        right: 5%;
+      }
+
+      /* responsive scaling, because pinball tables are tall */
+      /* @media (min-height: 0px) {
+        .game-container { transform: scale(0.25); }
+      }
+      @media (min-height: 400px) {
+        .game-container { transform: scale(0.5); }
+      }
+      @media (min-height: 600px) {
+        .game-container { transform: scale(0.75); }
+      }
+      @media (min-height: 800px) {
+        .game-container { transform: scale(1); }
+      } */
+
+    </style>
+  </head>
+  <body>
+    <img class="gif-anim" src="/src/assets/animations/test.gif" alt="">
+    <div class="game-container">
+      <div class="score current-score">
+        score<br><span></span>
+      </div>
+      <div class="score high-score">
+        high score<br><span></span>
+      </div>
+    </div>
+  </body>
+</html>

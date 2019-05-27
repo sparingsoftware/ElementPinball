@@ -7,9 +7,9 @@ export default class Path {
 		this.body = Matter.Bodies.fromVertices(x, y, vertices, {
 			isStatic: true,
 			render: {
-				fillStyle: consts.COLOR.OUTER,
+				fillStyle: consts.COLOR.TYPO,
 				// add stroke and line width to fill in slight gaps between fragments
-				strokeStyle: consts.COLOR.OUTER,
+				strokeStyle: consts.COLOR.TYPO,
 				lineWidth: 1
 			}
 		})

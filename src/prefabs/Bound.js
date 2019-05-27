@@ -6,10 +6,9 @@ export default class Bound {
     this.body = Matter.Bodies.rectangle(x, y, width, height, {
 			isStatic: true,
 			render: {
-				fillStyle: consts.COLOR.OUTER
+				fillStyle: consts.COLOR.TYPO
 			}
     })
-
 		Matter.World.add(window.engine.world, this.body)
 	}
 }
