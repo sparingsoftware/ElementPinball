@@ -1,12 +1,13 @@
 global.decomp = require('poly-decomp')
+import './scss/app.scss'
 import Matter from 'matter-js'
 import MatterAttractors from 'matter-attractors'
-import consts from './consts'
-import Bound from './prefabs/Bound'
-import Wall from './prefabs/Wall'
-import Path from './prefabs/Path'
-import Reset from './prefabs/Reset'
-import Bumper from './prefabs/Bumper'
+import consts from './scripts/consts'
+import Bound from './scripts/prefabs/Bound'
+import Wall from './scripts/prefabs/Wall'
+import Path from './scripts/prefabs/Path'
+import Reset from './scripts/prefabs/Reset'
+import Bumper from './scripts/prefabs/Bumper'
 
 (() => {
 	// plugins
@@ -21,6 +22,7 @@ import Bumper from './prefabs/Bumper'
 	let engine, world, render, pinball, stopperGroup;
 	let leftPaddle, leftUpStopper, leftDownStopper, isLeftPaddleUp;
 	let rightPaddle, rightUpStopper, rightDownStopper, isRightPaddleUp;
+	let isPinballBlocked;
 
 	function load() {
 		init();
@@ -38,7 +40,7 @@ import Bumper from './prefabs/Bumper'
 		world = engine.world;
 		world.bounds = {
 			min: { x: 0, y: 0},
-			max: { x: 500, y: 800 }
+			max: { x: 1080, y: 1920 }
 		};
 		world.gravity.y = consts.GRAVITY; // simulate rolling on a slanted table
 
@@ -51,7 +53,7 @@ import Bumper from './prefabs/Bumper'
 				height: world.bounds.max.y,
 				wireframes: consts.WIREFRAMES,
 				// background: consts.COLOR.BACKGROUND
-				background: './src/assets/images/spirala.png'
+				background: './assets/spirala.png'
 			}
 		});
 		Matter.Render.run(render);
@@ -68,6 +70,7 @@ import Bumper from './prefabs/Bumper'
 		highScore = 0;
 		isLeftPaddleUp = false;
 		isRightPaddleUp = false;
+		isPinballBlocked = true;
 	}
 
 	function createStaticBodies() {
@@ -226,7 +229,7 @@ import Bumper from './prefabs/Bumper'
 			}
 		});
 		Matter.World.add(world, pinball);
-		launchPinball();
+		dockPinball();
 	}
 
 	function createEvents() {
@@ -237,7 +240,7 @@ import Bumper from './prefabs/Bumper'
 				if (pair.bodyB.label === 'pinball') {
 					switch (pair.bodyA.label) {
 						case 'reset':
-							launchPinball();
+							dockPinball();
 							break;
 						case 'bumper':
 							pingBumper(pair.bodyA);
@@ -256,9 +259,9 @@ import Bumper from './prefabs/Bumper'
 			});
 
 			// cheap way to keep ball from going back down the shooter lane
-			if (pinball.position.x > 450 && pinball.velocity.y > 0) {
-				Matter.Body.setVelocity(pinball, { x: 0, y: -10 });
-			}
+			// if (pinball.position.x > 450 && pinball.velocity.y > 0) {
+			// 	Matter.Body.setVelocity(pinball, { x: 0, y: -10 });
+			// }
 		});
 
 		// mouse drag (god mode for grabbing pinball)
@@ -287,11 +290,23 @@ import Bumper from './prefabs/Bumper'
 				isRightPaddleUp = false;
 			}
 		});
+
+		document.body.addEventListener('keyup', function(e) {
+			if (e.which === 13 && isPinballBlocked) { // left arrow key
+				launchPinball()
+				isPinballBlocked = false
+			}
+		});
+	}
+
+	function dockPinball() {
+		updateScore(0);
+		isPinballBlocked = true
+		Matter.Body.setPosition(pinball, { x: 465, y: 755 });
 	}
 
 	function launchPinball() {
-		updateScore(0);
-		Matter.Body.setPosition(pinball, { x: 465, y: 765 });
+		Matter.Body.setPosition(pinball, { x: 465, y: 755 });
 		Matter.Body.setVelocity(pinball, { x: 0, y: -25 + rand(-2, 2) });
 		Matter.Body.setAngularVelocity(pinball, 0);
 	}

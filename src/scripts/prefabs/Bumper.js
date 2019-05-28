@@ -9,7 +9,7 @@ export default class Bumper {
       render: {
         // fillStyle: consts.COLOR.BUMPER
         sprite: {
-          texture: './src/assets/images/rock.png',
+          texture: './assets/rock.png',
           xScale: 0.02,
           yScale: 0.02
         }

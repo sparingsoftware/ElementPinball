@@ -5,8 +5,8 @@ plugins/
 dist/
 .vscode/
 *.log
+/index.html
 build/
 .DS_Store
 .config
 .idea
-

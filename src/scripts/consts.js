@@ -7,16 +7,11 @@ export default {
     APRON_RIGHT: '180 0 180 120 0 120 180 0'
   },
   COLOR: {
-    BACKGROUND: '#d3d3d3',
-    OUTER: '#495057',
-    INNER: '#15aabf',
-    BUMPER: '#fab005',
-    BUMPER_LIT: '#fff3bf',
-    PADDLE: '#e64980',
-    PINBALL: '#dee2e6'
+    GRAY: '#565960',
+    PEACH: '#F98C65'
   },
   GRAVITY: 0.75,
-  // WIREFRAMES: true,
+  WIREFRAMES: false,
   BUMPER_BOUNCE: 1.5,
   PADDLE_PULL: 0.002,
   MAX_VELOCITY: 50
