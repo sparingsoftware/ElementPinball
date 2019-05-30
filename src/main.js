@@ -28,11 +28,20 @@ import Reset from './scripts/prefabs/Reset'
 	let isPinballBlocked;
 
 	function load() {
+		onResize();
 		init();
 		createStaticBodies();
 		// createPaddles();
 		// createPinball();
 		// createEvents();
+	}
+
+	function onResize () {
+		const gameContainer = document.querySelector('.game-container')
+		const windowHeight = window.innerHeight
+		const scale = windowHeight / 1920
+		gameContainer.style.webkitTransform = `scale(${scale})`
+		gameContainer.style.transform = `scale(${scale})`
 	}
 
 	function init() {
@@ -434,5 +443,6 @@ import Reset from './scripts/prefabs/Reset'
 		});
 	}
 
-	window.addEventListener('load', load, false);
+	window.addEventListener('load', load, false)
+	window.addEventListener('resize', onResize)
 })();

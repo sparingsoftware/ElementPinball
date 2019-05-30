@@ -9,16 +9,4 @@
 canvas {
 	overflow: hidden;
 }
-/* responsive scaling, because pinball tables are tall */
-// @media (min-height: 0px) {
-//   .game-container { transform: scale(0.25); }
-// }
-// @media (min-height: 400px) {
-//   .game-container { transform: scale(0.5); }
-// }
-// @media (min-height: 600px) {
-//   .game-container { transform: scale(0.75); }
-// }
-// @media (min-height: 800px) {
-//   .game-container { transform: scale(0.5); }
-// }
+
