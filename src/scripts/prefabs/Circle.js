@@ -7,12 +7,7 @@ export default class Circle {
       label: 'bumper',
       isStatic: true,
       render: {
-        fillStyle: consts.COLOR.PEACH
-        // sprite: {
-          // texture: './assets/rock.png',
-          // xScale: 0.02,
-          // yScale: 0.02
-        // }
+        fillStyle: consts.COLOR.GRAY
       }
     });
 

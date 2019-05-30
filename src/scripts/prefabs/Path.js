@@ -6,15 +6,10 @@ export default class Path {
     let vertices = Matter.Vertices.fromPath(path)
 		this.body = Matter.Bodies.fromVertices(x, y, vertices, {
 			isStatic: true,
-			render: {
-				fillStyle: consts.COLOR.PEACH,
-				// add stroke and line width to fill in slight gaps between fragments
-				strokeStyle: consts.COLOR.PEACH,
-				lineWidth: 1
-			}
+      render: {
+        fillStyle: consts.COLOR.PEACH
+      }
 		})
-
-		// Matter.Body.setPosition(this.body, {x: x, y: y})
 
 		Matter.World.add(window.engine.world, this.body)
 	}

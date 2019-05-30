@@ -7,11 +7,6 @@ export default class Trapezoid {
       isStatic: true,
       render: {
         fillStyle: consts.COLOR.PEACH
-        // sprite: {
-          // texture: './assets/rock.png',
-          // xScale: 0.02,
-          // yScale: 0.02
-        // }
       }
 		})
 

@@ -3,6 +3,9 @@ import './scss/app.scss'
 import Matter from 'matter-js'
 import MatterAttractors from 'matter-attractors'
 import consts from './scripts/consts'
+import {
+	setBackground
+} from './scripts/utils'
 import Trapezoid from './scripts/prefabs/Trapezoid'
 import Path from './scripts/prefabs/Path'
 import Circle from './scripts/prefabs/Circle'
@@ -53,6 +56,9 @@ import Reset from './scripts/prefabs/Reset'
 				height: world.bounds.max.y,
 				wireframes: consts.WIREFRAMES,
 				background: 'transparent'
+        // showDebug: false,
+        // showBounds: true,
+        // showPositions: true
 			}
 		});
 		Matter.Render.run(render);
@@ -87,46 +93,98 @@ import Reset from './scripts/prefabs/Reset'
 		new Rectangle(1005, 360, 5, 500) // right
 
 		//top elements line
-		new Path(318, 383, consts.PATHS.LEFT_CYLINDER)
-		new Trapezoid(500, 455, 70, 80, 1)
-		new Path(627, 383, consts.PATHS.RIGHT_CYLINDER)
+		const leftCylinder = new Path(318, 383, consts.PATHS.LEFT_CYLINDER)
+		setBackground(leftCylinder, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
+		const cone = new Trapezoid(500, 455, 70, 80, 1)
+		setBackground(cone, 'cone', { xOffset: 0.43, yOffset: 0.44 })
+		const rightCylinder = new Path(627, 383, consts.PATHS.RIGHT_CYLINDER)
+		setBackground(rightCylinder, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
 
 		//rocks line
-		new Path(265, 678, consts.PATHS.LEFT_ROCK)
-		new Path(490, 668, consts.PATHS.MIDDLE_ROCK)
-		new Path(735, 678, consts.PATHS.RIGHT_ROCK)
+		const leftRock = new Path(265, 678, consts.PATHS.LEFT_ROCK)
+		leftRock.body.render.visible = false
+		const leftRockCover = new Circle(245, 665, 40)
+		setBackground(leftRockCover, 'rock-left', { xOffset: 0.43, yOffset: 0.39 })
+
+		const middleRock = new Path(490, 668, consts.PATHS.MIDDLE_ROCK)
+		middleRock.body.render.visible = false
+		const middleRockCover = new Circle(500, 660, 40)
+		setBackground(middleRockCover, 'rock-right', { xOffset: 0.45, yOffset: 0.44 })
+
+		const rightRock = new Path(735, 678, consts.PATHS.RIGHT_ROCK)
+		rightRock.body.render.visible = false
+		const rightRockCover = new Circle(745, 670, 40)
+		setBackground(rightRockCover, 'rock-right', { xOffset: 0.47, yOffset: 0.44, xScale: 0.6, yScale: 0.6 })
 
 		//flippers lane
-		new Path(270, 1230, consts.PATHS.LEFT_TRIANGLE)
-		new Path(735, 1230, consts.PATHS.RIGHT_TRIANGLE)
-		new Path(160, 1230, consts.PATHS.LEFT_TOP_FLIPPER)
-		new Path(830, 1215, consts.PATHS.RIGHT_TOP_FLIPPER)
-		new Rectangle(755, 1425, 146, 5, -0.65) // right line between
-		new Circle(825, 1380, 22) // right top
-		new Circle(695, 1470, 22) // right bottom
-		new Rectangle(230, 1420, 146, 5, 0.65) // left line between
-		new Circle(175, 1380, 22) // left top
-		new Circle(300, 1465, 22) // left bottom
+		const leftEnvelope = new Path(270, 1230, consts.PATHS.LEFT_ENVELOPE)
+		setBackground(leftEnvelope, 'envelope-left', { xOffset: 0.54, yOffset: 0.48 })
+		const rightEnvelope = new Path(735, 1230, consts.PATHS.RIGHT_ENVELOPE)
+		setBackground(rightEnvelope, 'envelope-right', { xOffset: 0.45, yOffset: 0.48 })
 
-		//side leafs
-		new Trapezoid(895, 940, 340, 135, 1, -1.6)
-		new Path(85, 950, consts.PATHS.LEFT_LEAF)
+		const leftTopFlipper = new Path(160, 1215, consts.PATHS.LEFT_TOP_FLIPPER)
+		leftTopFlipper.body.render.visible = false
+		const leftTopFlipperCover = new Circle(162, 1230, 8)
+		setBackground(leftTopFlipperCover, 'zigzag-left', { xOffset: 0.43, yOffset: 0.58 })
+
+		const rightTopFlipper = new Path(830, 1215, consts.PATHS.RIGHT_TOP_FLIPPER)
+		rightTopFlipper.body.render.visible = false
+		const rightTopFlipperCover = new Circle(833, 1215, 8)
+		setBackground(rightTopFlipperCover, 'zigzag-right', { xOffset: 0.43, yOffset: 0.58 })
+
+		const leftLineFlipper = new Rectangle(230, 1420, 146, 5, 0.65) // left line between
+		leftLineFlipper.body.render.fillStyle = '#131925'
+		const flipperLeftTopCircle = new Circle(175, 1380, 22) // left top
+		setBackground(flipperLeftTopCircle, 'marble', { xOffset: 0.38, yOffset: 0.4, xScale: 0.4, yScale: 0.4 })
+		const flipperLeftBottomCircle = new Circle(300, 1465, 22) // left bottom
+		setBackground(flipperLeftBottomCircle, 'marble', { xOffset: 0.38, yOffset: 0.4, xScale: 0.4, yScale: 0.4 })
+
+		const rightLineFlipper = new Rectangle(755, 1425, 146, 5, -0.65) // right line between
+		rightLineFlipper.body.render.fillStyle = '#131925'
+		const flipperRightTopCircle = new Circle(825, 1380, 22) // right top
+		setBackground(flipperRightTopCircle, 'marble', { xOffset: 0.38, yOffset: 0.4, xScale: 0.4, yScale: 0.4 })
+		const flipperRightBottomCircle = new Circle(695, 1470, 22) // right bottom
+		setBackground(flipperRightBottomCircle, 'marble', { xOffset: 0.38, yOffset: 0.4, xScale: 0.4, yScale: 0.4 })
 
 		//shooter lane
-		new Rectangle(935, 1060, 37, 864)
+		const shooterLane = new Rectangle(935, 1060, 37, 864)
+		setBackground(shooterLane, 'straight-pipe', { xOffset: 0.4, yOffset: 0.485 })
+
+		//side leaflets
+		const leftLeaflet = new Path(85, 950, consts.PATHS.LEFT_LEAFLET)
+		leftLeaflet.body.render.visible = false
+		const leftLeafletCover = new Circle(70, 940, 20)
+		setBackground(leftLeafletCover, 'leaflet-peach', { xOffset: 0.57, yOffset: 0.52 })
+
+		const rightLeaflet = new Trapezoid(895, 940, 340, 135, 1, -1.6)
+		rightLeaflet.body.render.visible = false
+		const rightLeafletCover = new Circle(895, 940, 20)
+		setBackground(rightLeafletCover, 'leaflet-gray', { xOffset: 0.285, yOffset: 0.59 })
 
 		//pipes
-		new Path(820, 495, consts.PATHS.TOP_PIPE)
-		new Path(150, 900, consts.PATHS.BOTTOM_PIPE)
+		const topPipe = new Path(820, 495, consts.PATHS.TOP_PIPE)
+		topPipe.body.render.visible = false
+		const topPipeCover = new Circle(835, 485, 20)
+		setBackground(topPipeCover, 'quater-pipe-top', { xOffset: 0.58, yOffset: 0.4 })
+
+		const bottomPipe = new Path(150, 900, consts.PATHS.BOTTOM_PIPE)
+		bottomPipe.body.render.visible = false
+		const bottomPipeCover = new Circle(140, 910, 20)
+		setBackground(bottomPipeCover, 'quater-pipe-bottom', { xOffset: 0.41, yOffset: 0.6 })
 
 		// horizontal circle bumpers
-		new Circle(373, 880, 53)
-		new Circle(621, 880, 53)
+		const horizontalBumperLeft = new Circle(373, 880, 53)
+		setBackground(horizontalBumperLeft, 'marble', { xOffset: 0.39, yOffset: 0.39 })
+		const horizontalBumperRight = new Circle(621, 880, 53)
+		setBackground(horizontalBumperRight, 'marble', { xOffset: 0.39, yOffset: 0.39 })
 
 		// vertical circle bumpers
-		new Circle(498, 1088, 21)
-		new Circle(498, 1243, 57)
-		new Circle(498, 1398, 21)
+		const verticalBumperTop = new Circle(498, 1088, 21)
+		setBackground(verticalBumperTop, 'marble-peach', { xOffset: 0.45, yOffset: 0.45, xScale: 0.35, yScale: 0.35 })
+		const verticalBumperMiddle = new Circle(498, 1243, 57)
+		setBackground(verticalBumperMiddle, 'marble-peach', { xOffset: 0.45, yOffset: 0.45 })
+		const verticalBumperBottom = new Circle(498, 1398, 21)
+		setBackground(verticalBumperBottom, 'marble-peach', { xOffset: 0.45, yOffset: 0.45, xScale: 0.35, yScale: 0.35 })
 
 		// // reset zones (center, right)
 		new Reset(500, 100)

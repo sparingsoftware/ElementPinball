@@ -47,8 +47,8 @@ table {
 	border-spacing: 0;
 }
 
-* {
-  box-sizing: border-box;
+*, *::before, *::after {
+	box-sizing: border-box;
 }
 
 @import 'modules/colors';
