@@ -3,11 +3,11 @@ import './scss/app.scss'
 import Matter from 'matter-js'
 import MatterAttractors from 'matter-attractors'
 import consts from './scripts/consts'
-import Bound from './scripts/prefabs/Bound'
-import Wall from './scripts/prefabs/Wall'
+import Trapezoid from './scripts/prefabs/Trapezoid'
 import Path from './scripts/prefabs/Path'
+import Circle from './scripts/prefabs/Circle'
+import Rectangle from './scripts/prefabs/Rectangle'
 import Reset from './scripts/prefabs/Reset'
-import Bumper from './scripts/prefabs/Bumper'
 
 (() => {
 	// plugins
@@ -27,9 +27,9 @@ import Bumper from './scripts/prefabs/Bumper'
 	function load() {
 		init();
 		createStaticBodies();
-		createPaddles();
-		createPinball();
-		createEvents();
+		// createPaddles();
+		// createPinball();
+		// createEvents();
 	}
 
 	function init() {
@@ -52,8 +52,7 @@ import Bumper from './scripts/prefabs/Bumper'
 				width: world.bounds.max.x,
 				height: world.bounds.max.y,
 				wireframes: consts.WIREFRAMES,
-				// background: consts.COLOR.BACKGROUND
-				background: './assets/spirala.png'
+				background: 'transparent'
 			}
 		});
 		Matter.Render.run(render);
@@ -74,55 +73,64 @@ import Bumper from './scripts/prefabs/Bumper'
 	}
 
 	function createStaticBodies() {
-		// table boundaries (top, bottom, left, right)
-		new Bound(250, -30, 500, 100)
-		new Bound(250, 830, 500, 100)
-		new Bound(-30, 400, 100, 800)
-		new Bound(530, 400, 100, 800)
+		//bounds
+		new Rectangle(540, 190, 1080, 5) //top
+		new Rectangle(260, 1615, 450, 5, -2.55) // bottom angle left
+		new Rectangle(740, 1605, 450, 5, 2.55) // bottom angle right
+		new Rectangle(150, 1705, 270, 5, 2.3) // bottom decoration
+		new Rectangle(75, 1050, 5, 900) // left
+		new Rectangle(1005, 1160, 5, 1150) // right
+		new Rectangle(950, 1590, 5, 300) // left from shooter
 
-		// dome
-		new Path(440, 86, consts.PATHS.DOME),
+		// temporary rects
+		new Rectangle(75, 360, 5, 500) // left
+		new Rectangle(1005, 360, 5, 500) // right
 
-		// pegs (left, mid, right)
-		new Wall(140, 140, 20, 40, consts.COLOR.INNER),
-		new Wall(225, 140, 20, 40, consts.COLOR.INNER),
-		new Wall(310, 140, 20, 40, consts.COLOR.INNER),
+		//top elements line
+		new Path(318, 383, consts.PATHS.LEFT_CYLINDER)
+		new Trapezoid(500, 455, 70, 80, 1)
+		new Path(627, 383, consts.PATHS.RIGHT_CYLINDER)
 
-		// top bumpers (left, mid, right)
-		new Bumper(105, 250),
-		new Bumper(225, 250),
-		new Bumper(345, 250),
+		//rocks line
+		new Path(265, 678, consts.PATHS.LEFT_ROCK)
+		new Path(490, 668, consts.PATHS.MIDDLE_ROCK)
+		new Path(735, 678, consts.PATHS.RIGHT_ROCK)
 
-		// bottom bumpers (left, right)
-		new Bumper(165, 340),
-		new Bumper(285, 340),
+		//flippers lane
+		new Path(270, 1230, consts.PATHS.LEFT_TRIANGLE)
+		new Path(735, 1230, consts.PATHS.RIGHT_TRIANGLE)
+		new Path(160, 1230, consts.PATHS.LEFT_TOP_FLIPPER)
+		new Path(830, 1215, consts.PATHS.RIGHT_TOP_FLIPPER)
+		new Rectangle(755, 1425, 146, 5, -0.65) // right line between
+		new Circle(825, 1380, 22) // right top
+		new Circle(695, 1470, 22) // right bottom
+		new Rectangle(230, 1420, 146, 5, 0.65) // left line between
+		new Circle(175, 1380, 22) // left top
+		new Circle(300, 1465, 22) // left bottom
 
-		// shooter lane wall
-		new Wall(440, 520, 20, 560, consts.COLOR.OUTER),
+		//side leafs
+		new Trapezoid(895, 940, 340, 135, 1, -1.6)
+		new Path(85, 950, consts.PATHS.LEFT_LEAF)
 
-		// drops (left, right)
-		new Path(25, 360, consts.PATHS.DROP_LEFT),
-		new Path(425, 360, consts.PATHS.DROP_RIGHT),
+		//shooter lane
+		new Rectangle(935, 1060, 37, 864)
 
-		// slingshots (left, right)
-		new Wall(120, 510, 20, 120, consts.COLOR.INNER),
-		new Wall(330, 510, 20, 120, consts.COLOR.INNER),
+		//pipes
+		new Path(820, 495, consts.PATHS.TOP_PIPE)
+		new Path(150, 900, consts.PATHS.BOTTOM_PIPE)
 
-		// out lane walls (left, right)
-		new Wall(60, 529, 20, 160, consts.COLOR.INNER),
-		new Wall(390, 529, 20, 160, consts.COLOR.INNER),
+		// horizontal circle bumpers
+		new Circle(373, 880, 53)
+		new Circle(621, 880, 53)
 
-		// flipper walls (left, right);
-		new Wall(93, 624, 20, 98, consts.COLOR.INNER, -0.96),
-		new Wall(357, 624, 20, 98, consts.COLOR.INNER, 0.96),
+		// vertical circle bumpers
+		new Circle(498, 1088, 21)
+		new Circle(498, 1243, 57)
+		new Circle(498, 1398, 21)
 
-		// aprons (left, right)
-		new Path(79, 740, consts.PATHS.APRON_LEFT),
-		new Path(371, 740, consts.PATHS.APRON_RIGHT),
-
-		// reset zones (center, right)
-		new Reset(225, 50),
-		new Reset(465, 30)
+		// // reset zones (center, right)
+		new Reset(500, 100)
+		new Reset(970, 100)
 	}
 
 	function createPaddles() {

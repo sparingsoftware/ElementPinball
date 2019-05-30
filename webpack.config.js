@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 
 // Phaser webpack config
 // var phaserModule = path.join(__dirname, '/node_modules/phaser-ce/')
@@ -55,6 +56,9 @@ module.exports = {
       },
       hash: false
     }),
+    new CopyWebpackPlugin([
+      { from: 'assets', to: 'assets' }
+    ]),
     new BrowserSyncPlugin({
       host: process.env.IP || 'localhost',
       port: process.env.PORT || 3000,

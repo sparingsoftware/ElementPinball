@@ -1,0 +1,8 @@
+$defaultFont: benton-sans-wide;
+
+@mixin baseFont {
+	font-family: $defaultFont, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.2;
+}
