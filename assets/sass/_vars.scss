@@ -1,0 +1,20 @@
+$defaultFont: benton-sans-wide;
+
+// Grid
+$grid-max-width: 1390px;
+$grid-space-around: 20px;
+$container-width: 1440px;
+
+// Rwd
+$media-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 1170px,
+  xl: 1437px,
+);
+
+// Colors
+$gray: #565960;
+$peach: #F98C65;
+$black: #131925;

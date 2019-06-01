@@ -1,0 +1,37 @@
+@import '~sass-utils-collection';
+
+@mixin btn($isLight: false, $isBig: false) {
+  position: relative;
+  text-decoration: none;
+
+  @if $isBig == true {
+    @include fontBtnBig;
+  } @else {
+    @include fontBtn;
+  }
+
+  @if $isLight == true {
+    color: #fff;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      top: 50%;
+      left: -75px;
+      transform: translateY(-50%);
+      background-image: url('/svg/star-btn.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+
+      @include media-down (sm) {
+        width: 25px;
+        height: 25px;
+        left: -30px;
+      }
+    }
+  } @else {
+    color: $black;
+  }
+}

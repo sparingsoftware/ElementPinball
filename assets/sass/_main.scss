@@ -1,0 +1,44 @@
+@import './grid';
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+#__nuxt,
+#__layout {
+  height: 100%;
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+}
+
+html, body {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+
+  @include media-down (md) {
+    height: var(--vh);
+  }
+}
+
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  color: $black;
+  background-color: $peach;
+  @include baseFont;
+
+  &.game {
+    background-color: $gray;
+  }
+}
+
+.scene {
+  // width: 100%;
+}

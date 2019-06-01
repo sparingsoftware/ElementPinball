@@ -1,0 +1,29 @@
+@mixin baseFont {
+  font-family: $defaultFont, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.2;
+  // font-size: 27px;
+  font-size: 1.43vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+@mixin fontBtnBig {
+  // font-size: 120px;
+  font-size: 6.25vh;
+}
+
+@mixin fontBtn {
+  // font-size: 79px;
+  font-size: 4.12vh;
+}
+
+@mixin inputFont {
+  font-family: $defaultFont, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.92em;
+  // font-size: 63px;
+  font-size: 3.27vh;
+  text-align: center;
+}
