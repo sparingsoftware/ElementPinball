@@ -1,6 +1,6 @@
-# kukbuk-front
+# element-pinball
 
-> Kukbuk
+> Element Pinball
 
 ## Build Setup
 
