@@ -1,5 +1,13 @@
 <template>
   <section class="scene">
+    <div class="images-wrapper">
+      <img class="image image--half-pipe" src="/img/half-pipe.png">
+      <img class="image image--worm-black" src="/img/worm-black.png">
+      <img class="image image--worm-black-second" src="/img/worm-black.png">
+      <img class="image image--curl" src="/img/curl.png">
+      <img class="image image--star" src="/img/star.png">
+      <img class="image image--marshmallow" src="/img/marshmallow.png">
+    </div>
     <div class="score current-score">
       score
       <span class="score--value">20</span>
@@ -9,7 +17,7 @@
       <span class="score--value">120</span>
     </div>
     <div class="lives">
-      <img class="life life--disabled" src="/img/life.png" alt="">
+      <img class="life" src="/img/life.png" alt="">
       <img class="life" src="/img/life.png" alt="">
       <img class="life" src="/img/life.png" alt="">
     </div>
@@ -54,7 +62,7 @@ export default {
   align-items: center;
   justify-content: center;
   background-repeat: no-repeat;
-  background-position: 50%, 45% 145%;
+  background-position: 50%, 35% -40%;
   background-image: url('/img/board.png'), url('/img/board-bg.png');
 }
 
@@ -120,6 +128,58 @@ export default {
       opacity: 0.8;
       filter: grayscale(100%);
     }
+  }
+}
+
+.image {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+
+  &--curl {
+    height: 23.6vh;
+    top: 0%;
+    left: 50%;
+    transform: translate(-140%, 15%);
+    z-index: -1;
+  }
+
+  &--half-pipe {
+    height: 21.3vh;
+    top: 100%;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-20%, -50%);
+  }
+
+  &--worm-black {
+    height: 25.6vh;
+    bottom: 0%;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-110%, -20%) rotate(180deg);
+  }
+
+  &--worm-black-second {
+    height: 25.6vh;
+    bottom: 0%;
+    left: 50%;
+    z-index: -1;
+    transform: translate(-10%, -10%) rotate(5deg);
+  }
+
+  &--star {
+    height: 6.2vh;
+    top: 5%;
+    left: 50%;
+  }
+
+  &--marshmallow {
+    height: 12.2vh;
+    top: 10%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(100%, 0%);
   }
 }
 </style>

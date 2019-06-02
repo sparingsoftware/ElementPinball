@@ -19,7 +19,7 @@ const loadGame = () => {
   let currentScore, highScore
   let engine, world, render, pinball
   let isPinballBlocked
-  let lives = 3
+  let lives = 2
 
   init()
   createStaticBodies()
@@ -87,11 +87,18 @@ const loadGame = () => {
   }
 
   function gameOver () {
-    console.log('game over')
+    console.log('GAME OVER')
+    window.location.href = '/score'
+  }
+
+  function takeLife () {
+    const livesElements = document.querySelectorAll('.lives .life')
+    lives--
+    livesElements[lives + 1].classList.add('life--disabled')
   }
 
   function manageLives () {
-    lives ? lives-- : gameOver()
+    lives ? takeLife() : gameOver()
   }
 
   function createEvents () {

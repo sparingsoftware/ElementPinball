@@ -21,6 +21,8 @@ const createStaticBodies = () => {
   new Bound(540, 190, 1080, 5) // top
   new Bound(75, 360, 5, 500) // left
   new Bound(1005, 360, 5, 500) // right
+
+  const angledLine = new Rectangle(150, 1670, 200, 5, 2.4)
   /* eslint-enable */
 
   // top elements line
