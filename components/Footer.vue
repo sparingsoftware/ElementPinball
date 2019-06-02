@@ -18,6 +18,7 @@ export default {}
   color: $black;
   margin: 0 2vh 2vh;
   text-align: center;
+  z-index: 3;
 
   @include media-down (md) {
     line-height: 1.4;

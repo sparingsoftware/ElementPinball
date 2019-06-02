@@ -1,4 +1,3 @@
-// global.decomp = require('poly-decomp')
 import Matter from 'matter-js'
 import MatterAttractors from 'matter-attractors'
 import consts from './scripts/consts'
@@ -14,6 +13,8 @@ const loadGame = () => {
   // score elements
   const $currentScore = document.querySelector('.current-score span')
   const $highScore = document.querySelector('.high-score span')
+  const bounceSound = new Audio('/sounds/bounce.mp3')
+  const gameOverSound = new Audio('/sounds/game_over.mp3')
 
   // shared variables
   let currentScore, highScore
@@ -87,11 +88,14 @@ const loadGame = () => {
   }
 
   function gameOver () {
-    console.log('GAME OVER')
-    window.location.href = '/score'
+    gameOverSound.play()
+    // setTimeout(() => {
+    //   window.location.href = '/score'
+    // }, 200)
   }
 
   function takeLife () {
+    gameOverSound.play()
     const livesElements = document.querySelectorAll('.lives .life')
     lives--
     livesElements[lives + 1].classList.add('life--disabled')
@@ -156,18 +160,20 @@ const loadGame = () => {
   function dockPinball () {
     updateScore(0)
     isPinballBlocked = true
-    Matter.Body.setPosition(pinball, { x: 580, y: 850 })
-    // Matter.Body.setPosition(pinball, { x: 975, y: 1750 })
+    Matter.Body.setPosition(pinball, { x: 977, y: 1800 })
+    pinball.isStatic = true
   }
 
   function launchPinball () {
-    Matter.Body.setPosition(pinball, { x: 780, y: 850 })
-    // Matter.Body.setPosition(pinball, { x: 975, y: 1750 })
-    Matter.Body.setVelocity(pinball, { x: 0, y: -25 + customRand(-2, 2) })
+    pinball.isStatic = false
+    Matter.Body.setPosition(pinball, { x: 977, y: 1800 })
+    Matter.Body.setVelocity(pinball, { x: 0, y: -45 + customRand(-2, 2) })
     Matter.Body.setAngularVelocity(pinball, 0)
   }
 
   function pingBumper (bumper) {
+    bounceSound.play()
+
     updateScore(currentScore + 10)
 
     // flash color

@@ -148,7 +148,7 @@ export default {
     height: 21.3vh;
     top: 100%;
     left: 50%;
-    z-index: -1;
+    z-index: 2;
     transform: translate(-20%, -50%);
   }
 

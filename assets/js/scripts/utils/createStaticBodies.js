@@ -1,3 +1,4 @@
+// import Matter from 'matter-js'
 import consts from '../consts'
 import Trapezoid from '../prefabs/Trapezoid'
 import Path from '../prefabs/Path'
@@ -11,19 +12,22 @@ import { setBackground } from './utils'
 const createStaticBodies = () => {
   // bounds
   /* eslint-disable */
-  new Bound(260, 1615, 450, 5, -2.55) // bottom angle left
-  new Bound(740, 1605, 450, 5, 2.55) // bottom angle right
-  new Bound(75, 1050, 5, 900) // left
-  new Bound(1005, 1160, 5, 1150) // right
-  new Bound(949, 1590, 5, 300) // left from shooter
+  new Bound(255, 1618, 450, 20, -2.54) // bottom angle left
+  new Bound(745, 1610, 450, 20, 2.54) // bottom angle right
+  new Bound(68, 1050, 20, 900) // left
+  new Bound(1015, 1160, 20, 1150) // right
+  new Bound(942, 1605, 20, 260) // left from shooter
 
   // temporary without the arc
-  new Bound(540, 190, 1080, 5) // top
-  new Bound(75, 360, 5, 500) // left
-  new Bound(1005, 360, 5, 500) // right
+  new Bound(540, 184, 1080, 20) // top
+  new Bound(70, 360, 20, 500) // left
+  new Bound(1012, 360, 20, 500) // right
 
-  const angledLine = new Rectangle(150, 1670, 200, 5, 2.4)
+  new Path(318, 383, consts.PATHS.DOME)
   /* eslint-enable */
+
+  const angledLine = new Rectangle(175, 1675, 200, 5)
+  setBackground(angledLine, 'line-peach', { xOffset: 0.62, yOffset: 0.36 })
 
   // top elements line
   const leftCylinder = new Path(318, 383, consts.PATHS.LEFT_CYLINDER)
@@ -86,8 +90,8 @@ const createStaticBodies = () => {
   setBackground(flipperRightBottomCircle, 'marble', { xOffset: 0.38, yOffset: 0.4, xScale: 0.4, yScale: 0.4 })
 
   // shooter lane
-  const shooterLane = new Rectangle(935, 1060, 37, 864)
-  setBackground(shooterLane, 'straight-pipe', { xOffset: 0.4, yOffset: 0.485 })
+  // const shooterLane = new Rectangle(935, 1060, 37, 864)
+  // setBackground(shooterLane, 'straight-pipe', { xOffset: 0.4, yOffset: 0.485 })
 
   // side leaflets
   const leftLeaflet = new Path(85, 950, consts.PATHS.LEFT_LEAFLET)
@@ -127,8 +131,8 @@ const createStaticBodies = () => {
 
   // reset zones (center, right)
   /* eslint-disable */
-  new Reset(500, 100)
-  new Reset(970, 100)
+  new Reset(500, 1810, 150) // out
+  new Reset(970, 1810, 150) // dock
   /* eslint-enable */
 }
 

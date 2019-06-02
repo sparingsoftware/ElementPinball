@@ -8,8 +8,8 @@ export default class Rectangle {
       isStatic: true,
       chamfer: { radius: 10 },
       render: {
-        fillStyle: consts.COLOR.GREEN,
-        opacity: 0
+        fillStyle: consts.COLOR.GREEN
+        // opacity: 0
       }
     })
 

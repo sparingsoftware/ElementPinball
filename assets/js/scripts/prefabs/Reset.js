@@ -1,12 +1,13 @@
 import Matter from 'matter-js'
 
 export default class Reset {
-  constructor (x, width) {
-    this.body = Matter.Bodies.rectangle(x, 1800, width, 2, {
+  constructor (x, y, width) {
+    this.body = Matter.Bodies.rectangle(x, y, width, 2, {
       label: 'reset',
       isStatic: true,
       render: {
-        fillStyle: '#fff'
+        fillStyle: '#fff',
+        opacity: 0
       }
     })
 
