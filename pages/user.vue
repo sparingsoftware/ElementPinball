@@ -70,6 +70,7 @@ export default {
 
 .input {
   width: 85vw;
+  max-width: 1080px;
   margin: 0 auto;
   background: transparent;
   border: none;
@@ -82,6 +83,7 @@ export default {
 .error {
   color: #fff;
   width: 85vw;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 10px 0;
 }

@@ -4,6 +4,7 @@ import consts from './scripts/consts'
 import { createStaticBodies } from './scripts/utils/createStaticBodies'
 import { createPaddles } from './scripts/utils/createPaddles'
 import { customRand } from './scripts/utils/utils'
+// global.decomp = require('poly-decomp')
 // import Paddles from './scripts/prefabs/Paddles'
 
 const loadGame = () => {

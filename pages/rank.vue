@@ -76,6 +76,7 @@ export default {
 
 .rank {
   width: 85vw;
+  max-width: 1080px;
   max-height: 51vh;
   overflow: hidden;
 

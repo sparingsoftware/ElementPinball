@@ -1,4 +1,3 @@
-// import Matter from 'matter-js'
 import consts from '../consts'
 import Trapezoid from '../prefabs/Trapezoid'
 import Path from '../prefabs/Path'
@@ -23,7 +22,7 @@ const createStaticBodies = () => {
   new Bound(70, 360, 20, 500) // left
   new Bound(1012, 360, 20, 500) // right
 
-  new Path(318, 383, consts.PATHS.DOME)
+  // new Path(318, 383, consts.PATHS.DOME)
   /* eslint-enable */
 
   const angledLine = new Rectangle(175, 1675, 200, 5)
@@ -90,8 +89,8 @@ const createStaticBodies = () => {
   setBackground(flipperRightBottomCircle, 'marble', { xOffset: 0.38, yOffset: 0.4, xScale: 0.4, yScale: 0.4 })
 
   // shooter lane
-  // const shooterLane = new Rectangle(935, 1060, 37, 864)
-  // setBackground(shooterLane, 'straight-pipe', { xOffset: 0.4, yOffset: 0.485 })
+  const shooterLane = new Rectangle(935, 1060, 37, 864)
+  setBackground(shooterLane, 'straight-pipe', { xOffset: 0.4, yOffset: 0.485 })
 
   // side leaflets
   const leftLeaflet = new Path(85, 950, consts.PATHS.LEFT_LEAFLET)
