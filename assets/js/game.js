@@ -3,7 +3,7 @@ import MatterAttractors from 'matter-attractors'
 import consts from './scripts/consts'
 import { createStaticBodies } from './scripts/utils/createStaticBodies'
 import { createPaddles } from './scripts/utils/createPaddles'
-import { customRand } from './scripts/utils/utils'
+// import { customRand } from './scripts/utils/utils'
 // global.decomp = require('poly-decomp')
 // import Paddles from './scripts/prefabs/Paddles'
 
@@ -90,9 +90,9 @@ const loadGame = () => {
 
   function gameOver () {
     gameOverSound.play()
-    // setTimeout(() => {
-    //   window.location.href = '/score'
-    // }, 200)
+    setTimeout(() => {
+      window.location.href = '/score'
+    }, 200)
   }
 
   function takeLife () {
@@ -161,15 +161,17 @@ const loadGame = () => {
   function dockPinball () {
     updateScore(0)
     isPinballBlocked = true
-    Matter.Body.setPosition(pinball, { x: 977, y: 1800 })
+    Matter.Body.setPosition(pinball, { x: 600, y: 300 }) // for tests without dome
+    // Matter.Body.setPosition(pinball, { x: 977, y: 1800 })
     pinball.isStatic = true
   }
 
   function launchPinball () {
     pinball.isStatic = false
-    Matter.Body.setPosition(pinball, { x: 977, y: 1800 })
-    Matter.Body.setVelocity(pinball, { x: 0, y: -45 + customRand(-2, 2) })
-    Matter.Body.setAngularVelocity(pinball, 0)
+    Matter.Body.setPosition(pinball, { x: 600, y: 300 }) // for tests without dome
+    // Matter.Body.setPosition(pinball, { x: 977, y: 1800 })
+    // Matter.Body.setVelocity(pinball, { x: 0, y: -45 + customRand(-2, 2) })
+    // Matter.Body.setAngularVelocity(pinball, 0)
   }
 
   function pingBumper (bumper) {
