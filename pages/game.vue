@@ -204,9 +204,13 @@ export default {
         })
 
         document.body.addEventListener('keyup', function (e) {
-          if (e.which === 13 && game.isPinballBlocked) { // left arrow key
+          if (e.which === 13 && game.isPinballBlocked) {
             launchPinball()
             game.isPinballBlocked = false
+          }
+
+          if (e.which === 32) {
+            launchGodMode()
           }
         })
       }
@@ -226,15 +230,20 @@ export default {
         Matter.Body.setAngularVelocity(pinball, 0)
       }
 
+      function launchGodMode () {
+        Matter.Body.setVelocity(pinball, { x: 0, y: 10 })
+        Matter.Body.setAngularVelocity(pinball, 0)
+      }
+
       function pingBumper (bumper) {
         bounceSound.play()
 
         game.score += 10
 
         // flash color
-        bumper.render.fillStyle = consts.COLOR.BUMPER_LIT
+        bumper.render.opacity = 0.7
         setTimeout(() => {
-          bumper.render.fillStyle = consts.COLOR.BUMPER
+          bumper.render.opacity = 1
         }, 100)
       }
     }
