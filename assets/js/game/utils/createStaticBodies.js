@@ -1,3 +1,4 @@
+import Matter from 'matter-js'
 import consts from '../consts'
 import Trapezoid from '../prefabs/Trapezoid'
 import Path from '../prefabs/Path'
@@ -6,6 +7,7 @@ import Rectangle from '../prefabs/Rectangle'
 import Bumper from '../prefabs/Bumper'
 import Reset from '../prefabs/Reset'
 import Bound from '../prefabs/Bound'
+import Dome from '../prefabs/Dome'
 import { setBackground } from './utils'
 
 const createStaticBodies = () => {
@@ -19,11 +21,14 @@ const createStaticBodies = () => {
 
   // temporary without the arc
   new Bound(540, 184, 1080, 20) // top
-  new Bound(70, 360, 20, 500) // left
-  new Bound(1012, 360, 20, 500) // right
-
-  // new Path(318, 383, consts.PATHS.DOME)
   /* eslint-enable */
+
+  const domeRight = new Dome(925, 340, consts.PATHS.DOME)
+  Matter.Body.scale(domeRight.body, 2, 2)
+
+  const domeLeft = new Dome(205, 295, consts.PATHS.DOME)
+  Matter.Body.scale(domeLeft.body, 2, 2)
+  Matter.Body.rotate(domeLeft.body, -1.63)
 
   const angledLine = new Rectangle(175, 1675, 200, 5)
   setBackground(angledLine, 'line-peach', { xOffset: 0.62, yOffset: 0.36 })
@@ -31,10 +36,12 @@ const createStaticBodies = () => {
   // top elements line
   const leftCylinder = new Path(318, 383, consts.PATHS.LEFT_CYLINDER)
   setBackground(leftCylinder, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
+  const doubleLeftCylinderBody = new Rectangle(350, 438, 60, 120) // to prevent ball passing through
+  doubleLeftCylinderBody.body.render.opacity = 0
   const cone = new Trapezoid(500, 455, 70, 80, 1)
   setBackground(cone, 'cone', { xOffset: 0.43, yOffset: 0.44 })
-  const doubleCylinderBody = new Rectangle(656, 440, 60, 120) // to prevent ball passing through
-  doubleCylinderBody.body.render.opacity = 0
+  const doubleRightCylinderBody = new Rectangle(656, 440, 60, 120) // to prevent ball passing through
+  doubleRightCylinderBody.body.render.opacity = 0
   const rightCylinder = new Path(627, 383, consts.PATHS.RIGHT_CYLINDER)
   setBackground(rightCylinder, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
 

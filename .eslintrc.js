@@ -29,6 +29,6 @@ module.exports = {
     'arrow-parens': 0
   },
   globals: {
-    'Swiper': true
+    qrcode: true
   }
 }

@@ -7,7 +7,7 @@
     </label>
     <input
       id="user-name"
-      v-model="user"
+      v-model="userName"
       class="input"
       type="text"
     >
@@ -22,22 +22,19 @@
         wróć do gry
       </nuxt-link>
     </div>
-    <code-component/>
   </section>
 </template>
 
 <script>
-import CodeComponent from '@/components/Code'
 import ImagesComponent from '@/components/Images'
 
 export default {
   components: {
-    CodeComponent,
     ImagesComponent
   },
   data () {
     return {
-      user: '',
+      userName: '',
       error: false
     }
   },
@@ -45,8 +42,9 @@ export default {
     sendUserScore () {
       this.clearError()
 
-      if (this.user) {
-        console.log('Zapisz do rankingu')
+      if (this.userName) {
+        console.log('Zapisz do rankingu', this.$route.params.user || 0, this.userName)
+        this.$router.push('/rank')
       } else {
         this.error = true
       }

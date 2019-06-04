@@ -6,23 +6,23 @@
       twój wynik
     </div>
     <div class="score">
-      50020
+      {{ userScore }}
     </div>
     <div class="label">
       najwyższy wynik
     </div>
     <div class="score">
-      900020
+      {{ highScore }}
     </div>
     <div class="btns">
       <nuxt-link to="/game" class="btn-light">
         zagraj ponownie
       </nuxt-link>
-      <nuxt-link to="/user" class="btn-dark">
-        zapisz wynik
-      </nuxt-link>
+      <div class="btn-dark">
+        zeskanuj i zapisz wynik
+      </div>
     </div>
-    <code-component/>
+    <code-component :score="userScore"/>
   </section>
 </template>
 
@@ -34,7 +34,21 @@ export default {
   components: {
     CodeComponent,
     ImagesComponent
+  },
+  data () {
+    return {
+      highScore: 92001,
+      userScore: this.$store.getters.getCurrentScore
+    }
   }
+  // async asyncData ({ params, error, app }) {
+  //   // fetch data with highscore
+  //   const highscore = 92001
+
+  //   return {
+  //     highScore
+  //   }
+  // }
 }
 </script>
 

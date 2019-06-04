@@ -1,8 +1,18 @@
-const state = () => ({})
+const state = () => ({
+  score: 0
+})
 
-const getters = {}
+const getters = {
+  getCurrentScore (state) {
+    return state.score
+  }
+}
 
-const mutations = {}
+const mutations = {
+  setCurrentScore (state, userScore) {
+    state.score = userScore
+  }
+}
 
 const actions = {}
 
