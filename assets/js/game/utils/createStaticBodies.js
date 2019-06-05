@@ -36,11 +36,11 @@ const createStaticBodies = () => {
   // top elements line
   const leftCylinder = new Path(318, 383, consts.PATHS.LEFT_CYLINDER)
   setBackground(leftCylinder, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
-  const doubleLeftCylinderBody = new Rectangle(350, 438, 60, 120) // to prevent ball passing through
+  const doubleLeftCylinderBody = new Rectangle(350, 438, 60, 120, 0, 30) // to prevent ball passing through
   doubleLeftCylinderBody.body.render.opacity = 0
   const cone = new Trapezoid(500, 455, 70, 80, 1)
   setBackground(cone, 'cone', { xOffset: 0.43, yOffset: 0.44 })
-  const doubleRightCylinderBody = new Rectangle(656, 440, 60, 120) // to prevent ball passing through
+  const doubleRightCylinderBody = new Rectangle(656, 440, 60, 120, 0, 30) // to prevent ball passing through
   doubleRightCylinderBody.body.render.opacity = 0
   const rightCylinder = new Path(627, 383, consts.PATHS.RIGHT_CYLINDER)
   setBackground(rightCylinder, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })

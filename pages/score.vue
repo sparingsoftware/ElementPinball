@@ -37,18 +37,19 @@ export default {
   },
   data () {
     return {
-      highScore: 92001,
       userScore: this.$store.getters.getCurrentScore
     }
+  },
+  computed: {
+    highScore () {
+      return this.rank.ranking[0] ? this.rank.ranking[0].score : 0
+    }
+  },
+  async asyncData ({ params, error, app }) {
+    return {
+      rank: await app.$service.rank.all()
+    }
   }
-  // async asyncData ({ params, error, app }) {
-  //   // fetch data with highscore
-  //   const highscore = 92001
-
-  //   return {
-  //     highScore
-  //   }
-  // }
 }
 </script>
 

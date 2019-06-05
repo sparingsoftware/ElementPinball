@@ -35,7 +35,25 @@ const stopper = (x, y, side, position) => {
   })
 }
 
+function setPaddleUp (evt) {
+  const breakpoint = window.innerWidth / 2
+  const clientX = evt.pageX || evt.touches[0].clientX
+
+  clientX > breakpoint ? window.isRightPaddleUp = true : window.isLeftPaddleUp = true
+}
+
+function setPaddleDown (evt) {
+  const breakpoint = window.innerWidth / 2
+  const clientX = evt.pageX || evt.changedTouches[0].clientX
+
+  clientX > breakpoint ? window.isRightPaddleUp = false : window.isLeftPaddleUp = false
+}
+
 const createPaddleEvents = () => {
+  const el = document.querySelector('.game')
+  el.addEventListener('touchstart', setPaddleUp, false)
+  el.addEventListener('touchend', setPaddleDown, false)
+
   // keyboard paddle events
   document.body.addEventListener('keydown', function (e) {
     if (e.which === 37) { // left arrow key
@@ -44,6 +62,7 @@ const createPaddleEvents = () => {
       window.isRightPaddleUp = true
     }
   })
+
   document.body.addEventListener('keyup', function (e) {
     if (e.which === 37) { // left arrow key
       window.isLeftPaddleUp = false

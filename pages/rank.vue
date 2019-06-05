@@ -12,16 +12,16 @@
     </h1>
     <ol class="rank">
       <li
-        v-for="(user, id) in rankData"
+        v-for="(user, id) in userRanking"
         :key="id"
         class="rank-row"
         :class="{ 'user-position': user.isCurrent }"
       >
         <div class="rank--position">
-          {{ user.position }}
+          {{ user.ranking }}
         </div>
         <div class="rank--name">
-          {{ user.name }}
+          {{ user.user }}
         </div>
         <div class="rank--score">
           {{ user.score }}
@@ -38,18 +38,21 @@
 export default {
   data () {
     return {
-      rankData: [
-        { position: 1, name: 'bardzo długie imię', score: 900020 },
-        { position: 2, name: 'bardzo', score: 0 },
-        { position: 3, name: 'bardzo długie', score: 9000 },
-        { position: 4, name: 'bardzo długie', score: 9000 },
-        { position: 5, name: 'bardzo długie', score: 9000, isCurrent: true },
-        { position: 600, name: 'bardzo długie imię', score: 900 },
-        { position: 7, name: 'bardzo długie imię', score: 900020 },
-        { position: 8, name: 'bardzo długie imię', score: 900020 },
-        { position: 9, name: 'bardzo długie imię', score: 900020 },
-        { position: 10, name: 'bardzo długie imię', score: 900020 }
-      ]
+      userRanking: []
+    }
+  },
+  async asyncData ({ params, error, app }) {
+    return {
+      rank: await app.$service.rank.all()
+    }
+  },
+  mounted () {
+    if (process.browser && window.localStorage.getItem('userName')) {
+      this.$service.rank.score(window.localStorage.getItem('userName'), '1000').then(resp => {
+        this.userRanking = resp.ranking
+      })
+    } else {
+      this.userRanking = this.rank.ranking
     }
   }
 }

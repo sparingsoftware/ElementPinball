@@ -47,22 +47,27 @@ export default {
   },
   data () {
     return {
-      highScore: 92001,
       score: 0,
       isPinballBlocked: true,
       lives: 2
     }
   },
-  // async asyncData ({ params, error, app }) {
-  //   // fetch data with highscore
-  //   const highscore = 92001
-
-  //   return {
-  //     highScore
-  //   }
-  // },
+  computed: {
+    highScore () {
+      return this.rank.ranking[0] ? this.rank.ranking[0].score : 0
+    }
+  },
+  async asyncData ({ params, error, app }) {
+    return {
+      rank: await app.$service.rank.all()
+    }
+  },
   mounted () {
-    this.loadGame()
+    if (process.browser) {
+      setTimeout(() => {
+        this.loadGame()
+      }, 100)
+    }
     this.onResize()
     window.addEventListener('resize', this.onResize)
   },
@@ -155,7 +160,9 @@ export default {
         gameOverSound.play()
         game.$store.commit('setCurrentScore', game.score)
         setTimeout(() => {
-          game.$router.push('/score')
+          if (process.browser) {
+            window.localStorage.getItem('userName') ? game.$router.push('/score') : game.$router.push('/rank')
+          }
         }, 200)
       }
 
@@ -202,6 +209,14 @@ export default {
           //   Matter.Body.setVelocity(pinball, { x: 0, y: -10 })
           // }
         })
+
+        const el = document.querySelector('.game')
+        el.addEventListener('touchend', function (e) {
+          if (game.isPinballBlocked) {
+            launchPinball()
+            game.isPinballBlocked = false
+          }
+        }, false)
 
         document.body.addEventListener('keyup', function (e) {
           if (e.which === 13 && game.isPinballBlocked) {
@@ -303,6 +318,7 @@ export default {
   position: absolute;
   bottom: 45px;
   left: 35px;
+  z-index: 2;
 
   @include media-down (md) {
     bottom: 20px;

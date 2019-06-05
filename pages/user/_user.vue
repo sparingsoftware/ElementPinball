@@ -12,7 +12,7 @@
       type="text"
     >
     <div v-if="error" class="error">
-      Musisz wpisać imię żeby być w rankingu!
+      {{ error }}
     </div>
     <div class="btns">
       <div class="btn-light" @click="sendUserScore" @focus="clearError">
@@ -35,7 +35,7 @@ export default {
   data () {
     return {
       userName: '',
-      error: false
+      error: ''
     }
   },
   methods: {
@@ -43,14 +43,27 @@ export default {
       this.clearError()
 
       if (this.userName) {
-        console.log('Zapisz do rankingu', this.$route.params.user || 0, this.userName)
-        this.$router.push('/rank')
+        const userData = {
+          user: this.userName,
+          score: this.$route.params.user || this.$store.getters.getCurrentScore || 0
+        }
+
+        this.$service.score.add(userData).then(() => {
+          if (process.browser) {
+            window.localStorage.setItem('userName', this.userName)
+          }
+          this.$router.push('/rank')
+        }).catch(error => {
+          if (error.response) {
+            this.error = 'Nie udało się zapisać wyniku, spróbuj jeszcze raz.'
+          }
+        })
       } else {
-        this.error = true
+        this.error = 'Musisz wpisać imię żeby być w rankingu!'
       }
     },
     clearError () {
-      this.error = false
+      this.error = ''
     }
   }
 }
