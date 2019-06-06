@@ -167,9 +167,7 @@ export default {
         gameOverSound.play()
         game.$store.commit('setCurrentScore', game.score)
         setTimeout(() => {
-          if (process.browser) {
-            window.localStorage.getItem('userName') ? game.$router.push('/rank') : game.$router.push('/score')
-          }
+          game.$router.push('/score')
         }, 200)
       }
 

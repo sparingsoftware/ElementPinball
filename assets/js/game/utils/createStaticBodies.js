@@ -65,7 +65,6 @@ const createStaticBodies = () => {
   middleRockBound.body.render.opacity = 0
   middleRock.body.render.visible = false
   const middleRockCover = new Circle(500, 660, 40)
-  // middleRockCover.body.render.opacity = 0
   setBackground(middleRockCover, 'rock-right', { xOffset: 0.45, yOffset: 0.44 })
   middleRock.body.restitution = consts.SMALL_BOUNCE // bounce
 

@@ -18,9 +18,9 @@
       <div class="btn-light" @click="sendUserScore" @focus="clearError">
         zapisz
       </div>
-      <a href="#" class="btn-dark" @click="goToGame">
+      <!-- <a href="#" class="btn-dark" @click="goToGame">
         wróć do gry
-      </a>
+      </a> -->
     </div>
   </section>
 </template>

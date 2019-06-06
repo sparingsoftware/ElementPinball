@@ -78,7 +78,6 @@ export default {
 
 .title {
   position: relative;
-  // font-size: 74px;
   font-size: 3.86vh;
   margin-bottom: 1.95em;
   color: #fff;
@@ -87,6 +86,12 @@ export default {
 .btn-light {
   @include btn(true);
   margin-top: 1.63em;
+
+  @media (max-width: 1079px) {
+    & {
+      display: none;
+    }
+  }
 }
 
 .rank {
