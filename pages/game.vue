@@ -1,7 +1,6 @@
 <template>
   <section class="scene">
     <div class="images-wrapper">
-      <img class="image image--half-pipe" src="/img/half-pipe.png">
       <img class="image image--worm-black" src="/img/worm-black.png">
       <img class="image image--worm-black-second" src="/img/worm-black.png">
       <img class="image image--curl" src="/img/curl.png">
@@ -25,7 +24,10 @@
       <img class="life" src="/img/life.png" alt="">
       <img class="life" src="/img/life.png" alt="">
     </div>
-    <div ref="gameContainer" class="game-container"/>
+    <div ref="gameContainer" class="game-container">
+      <runway class="runway"/>
+      <img class="image image--half-pipe" src="/img/half-pipe.png">
+    </div>
   </section>
 </template>
 
@@ -36,8 +38,12 @@ import consts from '@/assets/js/game/consts'
 import { createStaticBodies } from '@/assets/js/game/utils/createStaticBodies'
 import { createPaddles } from '@/assets/js/game/utils/createPaddles'
 import { customRand } from '@/assets/js/game/utils/utils'
+import runway from '@/components/Runway'
 
 export default {
+  components: {
+    runway
+  },
   head () {
     return {
       bodyAttrs: {
@@ -141,7 +147,7 @@ export default {
         // x/y are set to when pinball is launched
         pinball = Matter.Bodies.circle(0, 0, 20, {
           label: 'pinball',
-          restitution: 0.1,
+          restitution: 0.5,
           collisionFilter: {
             group: window.stopperGroup
           },
@@ -161,7 +167,7 @@ export default {
         game.$store.commit('setCurrentScore', game.score)
         setTimeout(() => {
           if (process.browser) {
-            window.localStorage.getItem('userName') ? game.$router.push('/score') : game.$router.push('/rank')
+            window.localStorage.getItem('userName') ? game.$router.push('/rank') : game.$router.push('/score')
           }
         }, 200)
       }
@@ -205,9 +211,9 @@ export default {
           })
 
           // cheap way to keep ball from going back down the shooter lane
-          // if (pinball.position.x > 450 && pinball.velocity.y > 0) {
-          //   Matter.Body.setVelocity(pinball, { x: 0, y: -10 })
-          // }
+          if (pinball.position.x > 977 && pinball.velocity.y > 0) {
+            Matter.Body.setVelocity(pinball, { x: 0, y: -15 })
+          }
         })
 
         const el = document.querySelector('.game')
@@ -232,21 +238,19 @@ export default {
 
       function dockPinball () {
         game.isPinballBlocked = true
-        // Matter.Body.setPosition(pinball, { x: 400, y: 300 }) // for tests without dome
         Matter.Body.setPosition(pinball, { x: 977, y: 1800 })
         pinball.isStatic = true
       }
 
       function launchPinball () {
         pinball.isStatic = false
-        // Matter.Body.setPosition(pinball, { x: 400, y: 300 }) // for tests without dome
         Matter.Body.setPosition(pinball, { x: 977, y: 1800 })
         Matter.Body.setVelocity(pinball, { x: 0, y: -45 + customRand(-2, 2) })
         Matter.Body.setAngularVelocity(pinball, 0)
       }
 
       function launchGodMode () {
-        Matter.Body.setVelocity(pinball, { x: 0, y: 10 })
+        Matter.Body.setVelocity(pinball, { x: 0, y: -10 })
         Matter.Body.setAngularVelocity(pinball, 0)
       }
 
@@ -268,12 +272,11 @@ export default {
 
 <style lang="scss" scoped>
 .game-container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   background-repeat: no-repeat;
-  // background-position: 50%, 46% 145%;
-  // background-image: url('/img/board.png'), url('/img/board-bg.png');
   background-position: 46% 146%;
   background-image: url('/img/board-bg-all.png');
 }
@@ -282,13 +285,11 @@ export default {
   position: absolute;
   top: 45px;
   color: $peach;
-  // font-size: 21px;
   font-size: 1.1vh;
   display: flex;
   flex-direction: column;
 
   &--value {
-    // font-size: 118px;
     font-size: 6.15vh;
   }
 
@@ -358,7 +359,7 @@ export default {
   }
 
   &--half-pipe {
-    height: 21.3vh;
+    height: 407px;
     top: 100%;
     left: 50%;
     z-index: 2;
@@ -393,6 +394,17 @@ export default {
     z-index: 2;
     transform: translate(100%, 0%);
   }
+}
+
+.runway {
+  position: absolute;
+  bottom: 10.5%;
+  left: 92.1%;
+  -webkit-transform: translate(-100%, 0%);
+  transform: translate(-100%, 0%);
+  z-index: 2;
+  width: 33px;
+  height: 788.4px;
 }
 </style>
 

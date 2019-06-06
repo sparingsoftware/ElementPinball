@@ -28,9 +28,12 @@
         </div>
       </li>
     </ol>
-    <nuxt-link to="/game" class="btn-light">
+    <a href="#" class="btn-light" @click="goToGame">
       wróć do gry
-    </nuxt-link>
+    </a>
+    <div class="disabled btn-dark" @click="resetRank">
+      wyczyść ranking
+    </div>
   </section>
 </template>
 
@@ -48,11 +51,20 @@ export default {
   },
   mounted () {
     if (process.browser && window.localStorage.getItem('userName')) {
-      this.$service.rank.score(window.localStorage.getItem('userName'), '1000').then(resp => {
+      this.$service.rank.score(window.localStorage.getItem('userName')).then(resp => {
         this.userRanking = resp.ranking
       })
     } else {
       this.userRanking = this.rank.ranking
+    }
+  },
+  methods: {
+    goToGame () {
+      window.location.href = '/game'
+    },
+    resetRank () {
+      this.$service.rank.clear()
+      window.location.reload(true)
     }
   }
 }
@@ -164,5 +176,11 @@ export default {
     left: 100%;
     transform: translate(-49%, 15%);
   }
+}
+
+.disabled {
+  display: none;
+  @include btn();
+  margin-top: 1.63em;
 }
 </style>

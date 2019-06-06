@@ -12,10 +12,14 @@ const createService = (axios, store, error) => {
   return {
     rank: {
       all: () => http.get('/ranking_all', { useCache: true }),
-      score: (userName, userScore) => http.get(`/ranking_score?score=${userScore}&user=${userName}`, { useCache: true })
+      score: (userName) => http.get(`/ranking_user?user=${userName}`, { useCache: true }),
+      clear: () => http.post('/clear_scores')
     },
     score: {
       add: userData => http.post('/add_score', userData)
+    },
+    user: {
+      validate: userName => http.get(`/validate_user?user=${userName}`, { useCache: true })
     }
   }
 }

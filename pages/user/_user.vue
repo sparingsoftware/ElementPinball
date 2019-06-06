@@ -18,9 +18,9 @@
       <div class="btn-light" @click="sendUserScore" @focus="clearError">
         zapisz
       </div>
-      <nuxt-link to="/game" class="btn-dark">
+      <a href="#" class="btn-dark" @click="goToGame">
         wróć do gry
-      </nuxt-link>
+      </a>
     </div>
   </section>
 </template>
@@ -64,6 +64,9 @@ export default {
     },
     clearError () {
       this.error = ''
+    },
+    goToGame () {
+      window.location.href = '/game'
     }
   }
 }

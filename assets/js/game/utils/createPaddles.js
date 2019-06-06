@@ -79,9 +79,9 @@ const createPaddles = () => {
   createPaddleEvents()
   // these bodies keep paddle swings contained, but allow the ball to pass through
   const leftUpStopper = stopper(400, 1410, 'left', 'up')
-  const leftDownStopper = stopper(330, 1610, 'left', 'down')
+  const leftDownStopper = stopper(330, 1600, 'left', 'down')
   const rightUpStopper = stopper(590, 1410, 'right', 'up')
-  const rightDownStopper = stopper(655, 1610, 'right', 'down')
+  const rightDownStopper = stopper(670, 1600, 'right', 'down')
   Matter.World.add(window.engine.world, [leftUpStopper, leftDownStopper, rightUpStopper, rightDownStopper])
 
   // this group lets paddle pieces overlap each other
@@ -89,41 +89,32 @@ const createPaddles = () => {
 
   // Left paddle mechanism
   const paddleLeft = {}
-  const xLeftPos = 308
-  const yLeftPos = 1525
+  const xLeftPos = 320
+  const yLeftPos = 1495
 
-  const paddleLeftVertices = Matter.Vertices.fromPath(consts.PATHS.LEFT_FLIPPER_PADDLE)
-
-  paddleLeft.paddle = Matter.Bodies.fromVertices(xLeftPos, yLeftPos, paddleLeftVertices, {
+  paddleLeft.paddle = Matter.Bodies.trapezoid(xLeftPos, yLeftPos, 40, 140, 0.33, {
     label: 'paddleLeft',
+    angle: 2,
+    chamfer: {},
     render: {
       fillStyle: consts.COLOR.PADDLE
     }
   })
 
-  paddleLeft.brick = Matter.Bodies.rectangle(xLeftPos - 5, yLeftPos + 15, 80, 145, {
-    angle: 2.2,
+  paddleLeft.brick = Matter.Bodies.rectangle(xLeftPos - 5, yLeftPos + 25, 70, 145, {
+    angle: 1.95,
     chamfer: {},
     render: {
       visible: false
     }
   })
 
-  // paddleLeft.cover = Matter.Bodies.rectangle(xLeftPos, yLeftPos + 20, 100, 45, {
-  //   render: {
-  //     visible: true,
-  //     sprite: {
-  //       texture: `/img/flipper-right.png`
-  //     }
-  //   }
-  // })
-
   paddleLeft.comp = Matter.Body.create({
     label: 'paddleLeftComp',
     parts: [paddleLeft.paddle, paddleLeft.brick]
   })
 
-  paddleLeft.hinge = Matter.Bodies.circle(xLeftPos + 25, yLeftPos - 25, 5, {
+  paddleLeft.hinge = Matter.Bodies.circle(xLeftPos + 15, yLeftPos - 10, 5, {
     isStatic: true,
     render: {
       visible: false
@@ -136,7 +127,7 @@ const createPaddles = () => {
 
   paddleLeft.con = Matter.Constraint.create({
     bodyA: paddleLeft.comp,
-    pointA: { x: -35, y: -35 },
+    pointA: { x: -40, y: -38 },
     bodyB: paddleLeft.hinge,
     length: 0,
     stiffness: 0
@@ -146,20 +137,20 @@ const createPaddles = () => {
 
   // right paddle mechanism
   const paddleRight = {}
-  const xRightPos = 652
-  const yRightPos = 1525
+  const xRightPos = 648
+  const yRightPos = 1498
 
-  const paddleRightVertices = Matter.Vertices.fromPath(consts.PATHS.RIGHT_FLIPPER_PADDLE)
-
-  paddleRight.paddle = Matter.Bodies.fromVertices(xRightPos, yRightPos, paddleRightVertices, {
+  paddleRight.paddle = Matter.Bodies.trapezoid(xRightPos, yRightPos, 40, 140, 0.33, {
     label: 'paddleRight',
+    angle: -2,
+    chamfer: {},
     render: {
       fillStyle: consts.COLOR.PADDLE
     }
   })
 
-  paddleRight.brick = Matter.Bodies.rectangle(xRightPos, yRightPos + 15, 80, 145, {
-    angle: -2.2,
+  paddleRight.brick = Matter.Bodies.rectangle(xRightPos + 5, yRightPos + 25, 70, 145, {
+    angle: -1.95,
     chamfer: {},
     render: {
       visible: false
@@ -171,7 +162,7 @@ const createPaddles = () => {
     parts: [paddleRight.paddle, paddleRight.brick]
   })
 
-  paddleRight.hinge = Matter.Bodies.circle(xRightPos, yRightPos - 25, 5, {
+  paddleRight.hinge = Matter.Bodies.circle(xRightPos + 15, yRightPos - 10, 5, {
     isStatic: true,
     render: {
       visible: false
@@ -184,7 +175,7 @@ const createPaddles = () => {
 
   paddleRight.con = Matter.Constraint.create({
     bodyA: paddleRight.comp,
-    pointA: { x: 35, y: -35 },
+    pointA: { x: 40, y: -38 },
     bodyB: paddleRight.hinge,
     length: 0,
     stiffness: 0

@@ -15,9 +15,9 @@
       {{ highScore }}
     </div>
     <div class="btns">
-      <nuxt-link to="/game" class="btn-light">
+      <a href="#" class="btn-light" @click="goToGame">
         zagraj ponownie
-      </nuxt-link>
+      </a>
       <div class="btn-dark">
         zeskanuj i zapisz wynik
       </div>
@@ -48,6 +48,11 @@ export default {
   async asyncData ({ params, error, app }) {
     return {
       rank: await app.$service.rank.all()
+    }
+  },
+  methods: {
+    goToGame () {
+      window.location.href = '/game'
     }
   }
 }

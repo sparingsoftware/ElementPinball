@@ -5,7 +5,7 @@
   "author": "Panowie Programiści",
   "private": true,
   "scripts": {
-    "dev": "cross-env HOST=0.0.0.0 API_URL=http://localhost:6868/ nuxt",
+    "dev": "cross-env HOST=0.0.0.0 API_URL=https://element-game-backend.panowie.pro/ nuxt",
     "build": "cross-env nuxt build",
     "start": "cross-env HOST=0.0.0.0 NUXT_PORT=80 nuxt start",
     "generate": "nuxt generate --no-build",

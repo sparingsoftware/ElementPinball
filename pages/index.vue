@@ -8,10 +8,10 @@
     </h1>
     <div class="btns">
       <img class="image image--worm-light" src="/img/worm-light.png">
-      <nuxt-link to="/game" class="btn-light">
+      <a href="#" class="btn-light" @click="goToGame">
         <img class="image image--small-ball-white" src="/img/small-ball-white.png">
         zagraj!
-      </nuxt-link>
+      </a>
       <nuxt-link to="/rank" class="btn-dark">
         <img class="image image--half-pipe" src="/img/half-pipe.png">
         ranking
@@ -26,6 +26,11 @@ import ImagesComponent from '@/components/Images'
 export default {
   components: {
     ImagesComponent
+  },
+  methods: {
+    goToGame () {
+      window.location.href = '/game'
+    }
   }
 }
 </script>

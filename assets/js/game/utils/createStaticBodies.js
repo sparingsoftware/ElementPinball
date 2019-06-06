@@ -13,15 +13,14 @@ import { setBackground } from './utils'
 const createStaticBodies = () => {
   // bounds
   /* eslint-disable */
-  new Bound(255, 1618, 450, 20, -2.54) // bottom angle left
-  new Bound(745, 1610, 450, 20, 2.54) // bottom angle right
-  new Bound(68, 1050, 20, 900) // left
+  new Bound(250, 1625, 460, 40, -2.53) // bottom angle left
+  new Bound(745, 1625, 460, 40, 2.54) // bottom angle right
+  new Bound(28, 1050, 100, 900) // left
   new Bound(1015, 1160, 20, 1150) // right
   new Bound(942, 1605, 20, 260) // left from shooter
 
   // temporary without the arc
   new Bound(540, 184, 1080, 20) // top
-  /* eslint-enable */
 
   const domeRight = new Dome(925, 340, consts.PATHS.DOME)
   Matter.Body.scale(domeRight.body, 2, 2)
@@ -36,64 +35,89 @@ const createStaticBodies = () => {
   // top elements line
   const leftCylinder = new Path(318, 383, consts.PATHS.LEFT_CYLINDER)
   setBackground(leftCylinder, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
+  leftCylinder.body.restitution = consts.SMALL_BOUNCE // bounce
   const doubleLeftCylinderBody = new Rectangle(350, 438, 60, 120, 0, 30) // to prevent ball passing through
   doubleLeftCylinderBody.body.render.opacity = 0
+
   const cone = new Trapezoid(500, 455, 70, 80, 1)
   setBackground(cone, 'cone', { xOffset: 0.43, yOffset: 0.44 })
+  cone.body.restitution = consts.SMALL_BOUNCE // bounce
+
   const doubleRightCylinderBody = new Rectangle(656, 440, 60, 120, 0, 30) // to prevent ball passing through
   doubleRightCylinderBody.body.render.opacity = 0
   const rightCylinder = new Path(627, 383, consts.PATHS.RIGHT_CYLINDER)
   setBackground(rightCylinder, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
+  rightCylinder.body.restitution = consts.SMALL_BOUNCE // bounce
 
   // rocks line
   const leftRock = new Path(265, 678, consts.PATHS.LEFT_ROCK)
   leftRock.body.render.visible = false
   const leftRockCover = new Circle(245, 665, 40)
   setBackground(leftRockCover, 'rock-left', { xOffset: 0.43, yOffset: 0.39 })
+  leftRock.body.restitution = consts.SMALL_BOUNCE // bounce
 
   const middleRock = new Path(490, 668, consts.PATHS.MIDDLE_ROCK)
   middleRock.body.render.visible = false
   const middleRockCover = new Circle(500, 660, 40)
   setBackground(middleRockCover, 'rock-right', { xOffset: 0.45, yOffset: 0.44 })
+  middleRock.body.restitution = consts.SMALL_BOUNCE // bounce
 
   const rightRock = new Path(735, 678, consts.PATHS.RIGHT_ROCK)
   rightRock.body.render.visible = false
   const rightRockCover = new Circle(745, 670, 40)
   setBackground(rightRockCover, 'rock-right', { xOffset: 0.47, yOffset: 0.44, xScale: 0.6, yScale: 0.6 })
+  rightRock.body.restitution = consts.SMALL_BOUNCE // bounce
 
   // flippers lane
   const leftEnvelope = new Path(270, 1230, consts.PATHS.LEFT_ENVELOPE)
+  const doubleLeftEnvelopeBody = new Trapezoid(270, 1200, 90, 180, 2, 0) // to prevent ball passing through
+  doubleLeftEnvelopeBody.body.render.opacity = 0
+  doubleLeftEnvelopeBody.body.restitution = consts.ENVELOPE_BOUNCE // bouncy element of envelope
   setBackground(leftEnvelope, 'envelope-left', { xOffset: 0.54, yOffset: 0.48 })
+
   const rightEnvelope = new Path(735, 1230, consts.PATHS.RIGHT_ENVELOPE)
-  const doubleEnvelopeBody = new Trapezoid(735, 1200, 180, 90, 2, -1.55) // to prevent ball passing through
-  doubleEnvelopeBody.body.render.opacity = 0
+  const doubleRightEnvelopeBody = new Trapezoid(735, 1200, 180, 90, 2, -1.55) // to prevent ball passing through
+  doubleRightEnvelopeBody.body.render.opacity = 0
+  doubleRightEnvelopeBody.body.restitution = consts.ENVELOPE_BOUNCE // bouncy element of envelope
   const thirdEnvelopeBody = new Trapezoid(740, 1290, 100, 50, 1, 0.8) // to prevent ball passing through
   thirdEnvelopeBody.body.render.opacity = 0
   setBackground(rightEnvelope, 'envelope-right', { xOffset: 0.45, yOffset: 0.48 })
 
   const leftTopFlipper = new Path(160, 1215, consts.PATHS.LEFT_TOP_FLIPPER)
+  new Bound(160, 1220, 30, 290, -0.05)
   leftTopFlipper.body.render.visible = false
   const leftTopFlipperCover = new Circle(162, 1230, 8)
   setBackground(leftTopFlipperCover, 'zigzag-left', { xOffset: 0.43, yOffset: 0.58 })
 
   const rightTopFlipper = new Path(830, 1215, consts.PATHS.RIGHT_TOP_FLIPPER)
+  new Bound(830, 1220, 30, 290, 0.05)
   rightTopFlipper.body.render.visible = false
   const rightTopFlipperCover = new Circle(833, 1215, 8)
   setBackground(rightTopFlipperCover, 'zigzag-right', { xOffset: 0.43, yOffset: 0.58 })
 
   const leftLineFlipper = new Rectangle(230, 1420, 146, 5, 0.65) // left line between
   leftLineFlipper.body.render.fillStyle = '#131925'
+  new Bound(230, 1445, 146, 40, 0.65)
+
   const flipperLeftTopCircle = new Circle(175, 1380, 22) // left top
   setBackground(flipperLeftTopCircle, 'marble', { xOffset: 0.38, yOffset: 0.4, xScale: 0.4, yScale: 0.4 })
   const flipperLeftBottomCircle = new Circle(300, 1465, 22) // left bottom
   setBackground(flipperLeftBottomCircle, 'marble', { xOffset: 0.38, yOffset: 0.4, xScale: 0.4, yScale: 0.4 })
 
+  new Bound(270, 1448, 70, 20, 0.3) // rectangle for unstick ball on left flipper
+  new Bound(270, 1448, 70, 20, 0.3) // rectangle for unstick ball on left flipper
+
   const rightLineFlipper = new Rectangle(755, 1425, 146, 5, -0.65) // right line between
   rightLineFlipper.body.render.fillStyle = '#131925'
+  new Bound(770, 1440, 146, 40, -0.65)
+
   const flipperRightTopCircle = new Circle(825, 1380, 22) // right top
   setBackground(flipperRightTopCircle, 'marble', { xOffset: 0.38, yOffset: 0.4, xScale: 0.4, yScale: 0.4 })
   const flipperRightBottomCircle = new Circle(695, 1470, 22) // right bottom
   setBackground(flipperRightBottomCircle, 'marble', { xOffset: 0.38, yOffset: 0.4, xScale: 0.4, yScale: 0.4 })
+
+  new Bound(720, 1450, 70, 20, -0.3) // rectangle for unstick ball on right flipper
+  new Bound(720, 1450, 70, 20, -0.3) // rectangle for unstick ball on right flipper
 
   // shooter lane
   const shooterLane = new Rectangle(935, 1060, 37, 864)
@@ -128,15 +152,16 @@ const createStaticBodies = () => {
   setBackground(horizontalBumperRight, 'marble', { xOffset: 0.39, yOffset: 0.39 })
 
   // vertical circle bumpers
-  const verticalBumperTop = new Bumper(498, 1088, 21)
-  setBackground(verticalBumperTop, 'marble-peach', { xOffset: 0.45, yOffset: 0.45, xScale: 0.35, yScale: 0.35 })
-  const verticalBumperMiddle = new Bumper(498, 1243, 57)
+  // const verticalBumperTop = new Bumper(498, 1088, 21)
+  // setBackground(verticalBumperTop, 'marble-peach', { xOffset: 0.45, yOffset: 0.45, xScale: 0.35, yScale: 0.35 })
+  // const verticalBumperMiddle = new Bumper(498, 1243, 57)
+  // setBackground(verticalBumperMiddle, 'marble-peach', { xOffset: 0.45, yOffset: 0.45 })
+  const verticalBumperMiddle = new Bumper(498, 1100, 57)
   setBackground(verticalBumperMiddle, 'marble-peach', { xOffset: 0.45, yOffset: 0.45 })
-  const verticalBumperBottom = new Bumper(498, 1398, 21)
-  setBackground(verticalBumperBottom, 'marble-peach', { xOffset: 0.45, yOffset: 0.45, xScale: 0.35, yScale: 0.35 })
+  // const verticalBumperBottom = new Bumper(498, 1398, 21)
+  // setBackground(verticalBumperBottom, 'marble-peach', { xOffset: 0.45, yOffset: 0.45, xScale: 0.35, yScale: 0.35 })
 
   // reset zones (center, right)
-  /* eslint-disable */
   new Reset(500, 1810, 150) // out
   new Reset(970, 1810, 150) // dock
   /* eslint-enable */
