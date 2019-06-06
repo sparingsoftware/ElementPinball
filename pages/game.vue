@@ -217,6 +217,12 @@ export default {
           if (pinball.position.x > 977 && pinball.velocity.y > 0) {
             Matter.Body.setVelocity(pinball, { x: 0, y: -15 })
           }
+
+          if (!game.isPinballBlocked) {
+            if (pinball.velocity.x === 0 && pinball.velocity.y === 0) {
+              Matter.Body.setPosition(pinball, { x: 560, y: 320 })
+            }
+          }
         })
 
         const el = document.querySelector('.game')
