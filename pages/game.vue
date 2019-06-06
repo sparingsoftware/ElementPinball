@@ -26,6 +26,7 @@
     </div>
     <div ref="gameContainer" class="game-container">
       <runway class="runway"/>
+      <!-- <img class="image image--rock" src="/gif/rock.gif"> -->
       <img class="image image--half-pipe" src="/img/half-pipe.png">
     </div>
   </section>
@@ -412,6 +413,12 @@ export default {
     left: 50%;
     z-index: 2;
     transform: translate(100%, 0%);
+  }
+
+  &--rock {
+    top: 550px;
+    left: 369px;
+    width: 300px;
   }
 }
 

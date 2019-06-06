@@ -78,8 +78,8 @@ const createPaddles = () => {
 
   createPaddleEvents()
   // these bodies keep paddle swings contained, but allow the ball to pass through
-  const leftUpStopper = stopper(400, 1410, 'left', 'up')
-  const leftDownStopper = stopper(330, 1600, 'left', 'down')
+  const leftUpStopper = stopper(400, 1415, 'left', 'up')
+  const leftDownStopper = stopper(360, 1630, 'left', 'down')
   const rightUpStopper = stopper(590, 1410, 'right', 'up')
   const rightDownStopper = stopper(670, 1600, 'right', 'down')
   Matter.World.add(window.engine.world, [leftUpStopper, leftDownStopper, rightUpStopper, rightDownStopper])
@@ -89,10 +89,10 @@ const createPaddles = () => {
 
   // Left paddle mechanism
   const paddleLeft = {}
-  const xLeftPos = 325
-  const yLeftPos = 1498
+  const xLeftPos = 345
+  const yLeftPos = 1505
 
-  paddleLeft.paddle = Matter.Bodies.trapezoid(xLeftPos, yLeftPos, 40, 155, 0.33, {
+  paddleLeft.paddle = Matter.Bodies.trapezoid(xLeftPos, yLeftPos, 40, 165, 0.33, {
     label: 'paddleLeft',
     angle: 2,
     chamfer: {},
@@ -101,7 +101,7 @@ const createPaddles = () => {
     }
   })
 
-  paddleLeft.brick = Matter.Bodies.rectangle(xLeftPos - 5, yLeftPos + 25, 70, 155, {
+  paddleLeft.brick = Matter.Bodies.rectangle(xLeftPos - 5, yLeftPos + 25, 70, 170, {
     angle: 1.95,
     chamfer: {},
     render: {
@@ -111,10 +111,10 @@ const createPaddles = () => {
 
   paddleLeft.comp = Matter.Body.create({
     label: 'paddleLeftComp',
-    parts: [paddleLeft.paddle, paddleLeft.brick]
+    parts: [paddleLeft.brick, paddleLeft.paddle]
   })
 
-  paddleLeft.hinge = Matter.Bodies.circle(xLeftPos + 15, yLeftPos - 10, 5, {
+  paddleLeft.hinge = Matter.Bodies.circle(xLeftPos - 10, yLeftPos - 20, 5, {
     isStatic: true,
     render: {
       visible: false
@@ -127,7 +127,7 @@ const createPaddles = () => {
 
   paddleLeft.con = Matter.Constraint.create({
     bodyA: paddleLeft.comp,
-    pointA: { x: -40, y: -38 },
+    pointA: { x: -50, y: -45 },
     bodyB: paddleLeft.hinge,
     length: 0,
     stiffness: 0
@@ -137,10 +137,10 @@ const createPaddles = () => {
 
   // right paddle mechanism
   const paddleRight = {}
-  const xRightPos = 639
-  const yRightPos = 1502
+  const xRightPos = 629
+  const yRightPos = 1510
 
-  paddleRight.paddle = Matter.Bodies.trapezoid(xRightPos, yRightPos, 40, 155, 0.33, {
+  paddleRight.paddle = Matter.Bodies.trapezoid(xRightPos, yRightPos, 40, 165, 0.33, {
     label: 'paddleRight',
     angle: -2,
     chamfer: {},
@@ -149,7 +149,7 @@ const createPaddles = () => {
     }
   })
 
-  paddleRight.brick = Matter.Bodies.rectangle(xRightPos + 5, yRightPos + 25, 70, 155, {
+  paddleRight.brick = Matter.Bodies.rectangle(xRightPos + 5, yRightPos + 25, 70, 170, {
     angle: -1.95,
     chamfer: {},
     render: {
@@ -159,10 +159,10 @@ const createPaddles = () => {
 
   paddleRight.comp = Matter.Body.create({
     label: 'paddleRightComp',
-    parts: [paddleRight.paddle, paddleRight.brick]
+    parts: [paddleRight.brick, paddleRight.paddle]
   })
 
-  paddleRight.hinge = Matter.Bodies.circle(xRightPos + 15, yRightPos - 10, 5, {
+  paddleRight.hinge = Matter.Bodies.circle(xRightPos + 30, yRightPos - 15, 5, {
     isStatic: true,
     render: {
       visible: false
@@ -175,7 +175,7 @@ const createPaddles = () => {
 
   paddleRight.con = Matter.Constraint.create({
     bodyA: paddleRight.comp,
-    pointA: { x: 40, y: -38 },
+    pointA: { x: 50, y: -45 },
     bodyB: paddleRight.hinge,
     length: 0,
     stiffness: 0
