@@ -34,7 +34,7 @@ path {
 }
 
 @for $i from 1 through 10 {
-  path:nth-child(#{$i}n) {
+  path:nth-child(#{10 - $i}) {
     animation-delay: #{$i * 0.9}s;
   }
 }

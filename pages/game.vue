@@ -197,6 +197,9 @@ export default {
                 case 'bumper':
                   pingBumper(pair.bodyA)
                   break
+                case 'cylinder':
+                  pingBumper(pair.bodyA)
+                  break
               }
             }
           })
@@ -256,8 +259,9 @@ export default {
 
       function pingBumper (bumper) {
         bounceSound.play()
+        const points = bumper.label === 'bumper' ? 10 : 5
 
-        game.score += 10
+        game.score += points
 
         // flash color
         bumper.render.opacity = 0.7
@@ -398,13 +402,13 @@ export default {
 
 .runway {
   position: absolute;
-  bottom: 10.5%;
-  left: 92.1%;
+  bottom: 203px;
+  left: calc(100% - 84px);
   -webkit-transform: translate(-100%, 0%);
   transform: translate(-100%, 0%);
   z-index: 2;
-  width: 33px;
-  height: 788.4px;
+  width: 34px;
+  height: 789px;
 }
 </style>
 

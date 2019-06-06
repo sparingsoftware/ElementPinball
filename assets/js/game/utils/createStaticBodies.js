@@ -34,35 +34,43 @@ const createStaticBodies = () => {
 
   // top elements line
   const leftCylinder = new Path(318, 383, consts.PATHS.LEFT_CYLINDER)
-  setBackground(leftCylinder, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
-  leftCylinder.body.restitution = consts.SMALL_BOUNCE // bounce
+  leftCylinder.body.render.opacity = 0
   const doubleLeftCylinderBody = new Rectangle(350, 438, 60, 120, 0, 30) // to prevent ball passing through
-  doubleLeftCylinderBody.body.render.opacity = 0
+  doubleLeftCylinderBody.body.label = 'cylinder'
+  doubleLeftCylinderBody.body.restitution = consts.BUMPER_BOUNCE // bounce
+  setBackground(doubleLeftCylinderBody, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
 
   const cone = new Trapezoid(500, 455, 70, 80, 1)
   setBackground(cone, 'cone', { xOffset: 0.43, yOffset: 0.44 })
-  cone.body.restitution = consts.SMALL_BOUNCE // bounce
+  cone.body.restitution = consts.BUMPER_BOUNCE // bounce
 
-  const doubleRightCylinderBody = new Rectangle(656, 440, 60, 120, 0, 30) // to prevent ball passing through
-  doubleRightCylinderBody.body.render.opacity = 0
   const rightCylinder = new Path(627, 383, consts.PATHS.RIGHT_CYLINDER)
-  setBackground(rightCylinder, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
-  rightCylinder.body.restitution = consts.SMALL_BOUNCE // bounce
+  rightCylinder.body.render.opacity = 0
+  const doubleRightCylinderBody = new Rectangle(656, 440, 60, 120, 0, 30) // to prevent ball passing through
+  doubleRightCylinderBody.body.label = 'cylinder'
+  doubleRightCylinderBody.body.restitution = consts.BUMPER_BOUNCE // bounce
+  setBackground(doubleRightCylinderBody, 'cylinder', { xOffset: 0.44, yOffset: 0.4 })
 
   // rocks line
   const leftRock = new Path(265, 678, consts.PATHS.LEFT_ROCK)
+  const leftRockBound = new Circle(245, 665, 58)
+  leftRockBound.body.render.opacity = 0
   leftRock.body.render.visible = false
   const leftRockCover = new Circle(245, 665, 40)
   setBackground(leftRockCover, 'rock-left', { xOffset: 0.43, yOffset: 0.39 })
   leftRock.body.restitution = consts.SMALL_BOUNCE // bounce
 
   const middleRock = new Path(490, 668, consts.PATHS.MIDDLE_ROCK)
+  const middleRockBound = new Circle(500, 650, 90)
+  middleRockBound.body.render.opacity = 0
   middleRock.body.render.visible = false
   const middleRockCover = new Circle(500, 660, 40)
   setBackground(middleRockCover, 'rock-right', { xOffset: 0.45, yOffset: 0.44 })
   middleRock.body.restitution = consts.SMALL_BOUNCE // bounce
 
   const rightRock = new Path(735, 678, consts.PATHS.RIGHT_ROCK)
+  const rightRockBound = new Circle(745, 670, 58)
+  rightRockBound.body.render.opacity = 0
   rightRock.body.render.visible = false
   const rightRockCover = new Circle(745, 670, 40)
   setBackground(rightRockCover, 'rock-right', { xOffset: 0.47, yOffset: 0.44, xScale: 0.6, yScale: 0.6 })
@@ -128,11 +136,13 @@ const createStaticBodies = () => {
   leftLeaflet.body.render.visible = false
   const leftLeafletCover = new Circle(70, 940, 20)
   setBackground(leftLeafletCover, 'leaflet-peach', { xOffset: 0.57, yOffset: 0.52 })
+  leftLeaflet.body.restitution = consts.SMALL_BOUNCE // bounce
 
   const rightLeaflet = new Trapezoid(895, 940, 340, 135, 1, -1.6)
   rightLeaflet.body.render.visible = false
   const rightLeafletCover = new Circle(895, 940, 20)
   setBackground(rightLeafletCover, 'leaflet-gray', { xOffset: 0.285, yOffset: 0.59 })
+  rightLeaflet.body.restitution = consts.SMALL_BOUNCE // bounce
 
   // pipes
   const topPipe = new Path(820, 495, consts.PATHS.TOP_PIPE)
@@ -156,8 +166,8 @@ const createStaticBodies = () => {
   // setBackground(verticalBumperTop, 'marble-peach', { xOffset: 0.45, yOffset: 0.45, xScale: 0.35, yScale: 0.35 })
   // const verticalBumperMiddle = new Bumper(498, 1243, 57)
   // setBackground(verticalBumperMiddle, 'marble-peach', { xOffset: 0.45, yOffset: 0.45 })
-  const verticalBumperMiddle = new Bumper(498, 1100, 57)
-  setBackground(verticalBumperMiddle, 'marble-peach', { xOffset: 0.45, yOffset: 0.45 })
+  const verticalBumperMiddle = new Bumper(498, 1100, 50)
+  setBackground(verticalBumperMiddle, 'marble-peach', { xOffset: 0.45, yOffset: 0.45, xScale: 0.9, yScale: 0.9 })
   // const verticalBumperBottom = new Bumper(498, 1398, 21)
   // setBackground(verticalBumperBottom, 'marble-peach', { xOffset: 0.45, yOffset: 0.45, xScale: 0.35, yScale: 0.35 })
 

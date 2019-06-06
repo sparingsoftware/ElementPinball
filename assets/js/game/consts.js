@@ -20,7 +20,7 @@ export default {
     GRAY: '#565960',
     PEACH: '#F98C65',
     GREEN: '#00FF90',
-    PADDLE: '#000000'
+    PADDLE: '#27282e'
   },
   GRAVITY: 0.9,
   WIREFRAMES: false,
