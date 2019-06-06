@@ -263,11 +263,20 @@ export default {
 
         game.score += points
 
-        // flash color
-        bumper.render.opacity = 0.7
-        setTimeout(() => {
-          bumper.render.opacity = 1
-        }, 100)
+        if (bumper.label === 'bumper') {
+          // flash color
+          bumper.render.opacity = 0.7
+          setTimeout(() => {
+            bumper.render.opacity = 1
+          }, 100)
+        } else {
+          bumper.render.sprite.xScale = 0.95
+          bumper.render.sprite.yScale = 0.95
+          setTimeout(() => {
+            bumper.render.sprite.xScale = 1
+            bumper.render.sprite.yScale = 1
+          }, 100)
+        }
       }
     }
   }

@@ -89,10 +89,10 @@ const createPaddles = () => {
 
   // Left paddle mechanism
   const paddleLeft = {}
-  const xLeftPos = 320
-  const yLeftPos = 1495
+  const xLeftPos = 325
+  const yLeftPos = 1498
 
-  paddleLeft.paddle = Matter.Bodies.trapezoid(xLeftPos, yLeftPos, 40, 140, 0.33, {
+  paddleLeft.paddle = Matter.Bodies.trapezoid(xLeftPos, yLeftPos, 40, 155, 0.33, {
     label: 'paddleLeft',
     angle: 2,
     chamfer: {},
@@ -101,7 +101,7 @@ const createPaddles = () => {
     }
   })
 
-  paddleLeft.brick = Matter.Bodies.rectangle(xLeftPos - 5, yLeftPos + 25, 70, 145, {
+  paddleLeft.brick = Matter.Bodies.rectangle(xLeftPos - 5, yLeftPos + 25, 70, 155, {
     angle: 1.95,
     chamfer: {},
     render: {
@@ -137,10 +137,10 @@ const createPaddles = () => {
 
   // right paddle mechanism
   const paddleRight = {}
-  const xRightPos = 648
-  const yRightPos = 1498
+  const xRightPos = 639
+  const yRightPos = 1502
 
-  paddleRight.paddle = Matter.Bodies.trapezoid(xRightPos, yRightPos, 40, 140, 0.33, {
+  paddleRight.paddle = Matter.Bodies.trapezoid(xRightPos, yRightPos, 40, 155, 0.33, {
     label: 'paddleRight',
     angle: -2,
     chamfer: {},
@@ -149,7 +149,7 @@ const createPaddles = () => {
     }
   })
 
-  paddleRight.brick = Matter.Bodies.rectangle(xRightPos + 5, yRightPos + 25, 70, 145, {
+  paddleRight.brick = Matter.Bodies.rectangle(xRightPos + 5, yRightPos + 25, 70, 155, {
     angle: -1.95,
     chamfer: {},
     render: {
