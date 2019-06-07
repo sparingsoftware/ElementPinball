@@ -53,6 +53,19 @@ const createPaddleEvents = () => {
   const el = document.querySelector('.game')
   el.addEventListener('touchstart', setPaddleUp, false)
   el.addEventListener('touchend', setPaddleDown, false)
+  /* eslint-disable */
+  document.onkeypress = (e) => {
+	 if (e.code === 'KeyA') {
+		  window.isLeftPaddleUp = true
+	  } else if (e.code === 'KeyS') {
+		  window.isRightPaddleUp = true
+	  }
+
+	  setTimeout(()=>{
+		  window.isLeftPaddleUp = false
+		  window.isRightPaddleUp = false
+	  }, 100)
+  }
 
   // keyboard paddle events
   document.body.addEventListener('keydown', function (e) {
