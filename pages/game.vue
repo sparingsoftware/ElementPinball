@@ -26,7 +26,9 @@
     </div>
     <div ref="gameContainer" class="game-container">
       <runway class="runway"/>
-      <!-- <img class="image image--rock" src="/gif/rock.gif"> -->
+      <img class="image image--rock-left" src="/img/rock-left.png">
+      <img class="image image--rock" src="/img/rock-right.png">
+      <img class="image image--rock-right" src="/img/rock-right.png">
       <img class="image image--half-pipe" src="/img/half-pipe.png">
     </div>
   </section>
@@ -419,9 +421,39 @@ export default {
   }
 
   &--rock {
-    top: 550px;
+    top: 543px;
     left: 369px;
-    width: 300px;
+    width: 290px;
+    animation: FloatSides 6s ease-in-out infinite;
+    animation-fill-mode: both;
+  }
+
+  &--rock-left {
+    top: 591px;
+    left: 158px;
+    width: 203px;
+    animation: FloatSides 6s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+
+  &--rock-right {
+    top: 600px;
+    left: 664px;
+    width: 174px;
+    animation: FloatSides 6s ease-in-out infinite;
+    animation-delay: 7s;
+  }
+}
+
+@keyframes FloatSides {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
 
@@ -429,7 +461,6 @@ export default {
   position: absolute;
   bottom: 203px;
   left: calc(100% - 84px);
-  -webkit-transform: translate(-100%, 0%);
   transform: translate(-100%, 0%);
   z-index: 2;
   width: 34px;
