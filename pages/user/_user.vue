@@ -65,6 +65,10 @@ export default {
                   this.error = 'Nie udało się zapisać wyniku, spróbuj jeszcze raz.'
                 }
               })
+            }).catch(error => {
+              if (error.response) {
+                this.error = 'Nie udało się zapisać wyniku, spróbuj jeszcze raz.'
+              }
             })
           }
         })

@@ -175,6 +175,9 @@ export default {
 
       function takeLife () {
         gameOverSound.play()
+        game.$service.controllers.dead().catch(error => {
+          console.log('błąd serwera', error)
+        })
         const livesElements = document.querySelectorAll('.lives .life')
         game.lives--
         livesElements[game.lives + 1].classList.add('life--disabled')
@@ -226,24 +229,36 @@ export default {
           }
         })
 
-        const el = document.querySelector('.game')
-        el.addEventListener('touchend', function (e) {
-          if (game.isPinballBlocked) {
-            launchPinball()
-            game.isPinballBlocked = false
+        // const el = document.querySelector('.game')
+        // el.addEventListener('touchend', function (e) {
+        //   if (game.isPinballBlocked) {
+        //     launchPinball()
+        //     game.isPinballBlocked = false
+        //   }
+        // }, false)
+        document.addEventListener('keypress', function (e) {
+          if (e.code === 'KeyS' && game.isPinballBlocked) {
+            enterEvent()
           }
         }, false)
 
         document.body.addEventListener('keyup', function (e) {
           if (e.which === 13 && game.isPinballBlocked) {
-            launchPinball()
-            game.isPinballBlocked = false
+            enterEvent()
           }
 
           if (e.which === 32) {
             launchGodMode()
           }
         })
+      }
+
+      function enterEvent () {
+        game.$service.controllers.dead().catch(error => {
+          console.log('błąd serwera', error)
+        })
+        launchPinball()
+        game.isPinballBlocked = false
       }
 
       function dockPinball () {

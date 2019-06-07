@@ -27,9 +27,30 @@ export default {
   components: {
     ImagesComponent
   },
+  mounted () {
+    this.startControllers()
+    document.addEventListener('keypress', function (e) {
+      if (e.code === 'KeyA') {
+        this.$service.controllers.dead().catch(error => {
+          console.log('błąd serwera', error)
+        })
+        window.location.href = '/rank'
+      } else if (e.code === 'KeyS') {
+        this.$service.controllers.dead().catch(error => {
+          console.log('błąd serwera', error)
+        })
+        window.location.href = '/game'
+      }
+    }, false)
+  },
   methods: {
     goToGame () {
       window.location.href = '/game'
+    },
+    startControllers () {
+      this.$service.controllers.ready().catch(error => {
+        console.log('błąd serwera', error)
+      })
     }
   }
 }

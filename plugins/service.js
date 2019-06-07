@@ -1,12 +1,12 @@
 const createService = (axios, store, error) => {
-  const catchHttpErrors = httpErr => {
-    error({ statusCode: httpErr.response && httpErr.response.status })
-  }
+  // const catchHttpErrors = httpErr => {
+  //   // error({ statusCode: httpErr.response && httpErr.response.status })
+  // }
 
   const http = {
     post: (...args) => axios.$post(...args),
     patch: (...args) => axios.$patch(...args),
-    get: (...args) => axios.$get(...args).catch(catchHttpErrors)
+    get: (...args) => axios.$get(...args)
   }
 
   return {
@@ -22,6 +22,11 @@ const createService = (axios, store, error) => {
     },
     user: {
       validate: userName => http.get(`/validate_user?user=${userName}`, { useCache: true })
+    },
+    controllers: {
+      ready: () => http.get('http://localhost:5050/ready', { useCache: true }),
+      dead: () => http.get('http://localhost:5050/dead', { useCache: true }),
+      in_game: () => http.get('http://localhost:5050/in_game', { useCache: true })
     }
   }
 }

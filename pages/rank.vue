@@ -57,6 +57,15 @@ export default {
     } else {
       this.userRanking = this.rank.ranking
     }
+
+    document.addEventListener('keypress', function (e) {
+      if (e.code === 'KeyS') {
+        this.$service.controllers.dead().catch(error => {
+          console.log('błąd serwera', error)
+        })
+        window.location.href = '/game'
+      }
+    }, false)
   },
   methods: {
     goToGame () {

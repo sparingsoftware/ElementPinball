@@ -35,27 +35,28 @@ const stopper = (x, y, side, position) => {
   })
 }
 
-function setPaddleUp (evt) {
-  const breakpoint = window.innerWidth / 2
-  const clientX = evt.pageX || evt.touches[0].clientX
+// function setPaddleUp (evt) {
+//   const breakpoint = window.innerWidth / 2
+//   const clientX = evt.pageX || evt.touches[0].clientX
 
-  clientX > breakpoint ? window.isRightPaddleUp = true : window.isLeftPaddleUp = true
-}
+//   clientX > breakpoint ? window.isRightPaddleUp = true : window.isLeftPaddleUp = true
+// }
 
-function setPaddleDown (evt) {
-  const breakpoint = window.innerWidth / 2
-  const clientX = evt.pageX || evt.changedTouches[0].clientX
+// function setPaddleDown (evt) {
+//   const breakpoint = window.innerWidth / 2
+//   const clientX = evt.pageX || evt.changedTouches[0].clientX
 
-  clientX > breakpoint ? window.isRightPaddleUp = false : window.isLeftPaddleUp = false
-}
+//   clientX > breakpoint ? window.isRightPaddleUp = false : window.isLeftPaddleUp = false
+// }
 
 const createPaddleEvents = () => {
-  const el = document.querySelector('.game')
-  el.addEventListener('touchstart', setPaddleUp, false)
-  el.addEventListener('touchend', setPaddleDown, false)
+  // const el = document.querySelector('.game')
+  // el.addEventListener('touchstart', setPaddleUp, false)
+  // el.addEventListener('touchend', setPaddleDown, false)
   /* eslint-disable */
-  document.onkeypress = (e) => {
-	 if (e.code === 'KeyA') {
+
+  document.addEventListener('keypress', function (e) {
+    if (e.code === 'KeyA') {
 		  window.isLeftPaddleUp = true
 	  } else if (e.code === 'KeyS') {
 		  window.isRightPaddleUp = true
@@ -65,7 +66,7 @@ const createPaddleEvents = () => {
 		  window.isLeftPaddleUp = false
 		  window.isRightPaddleUp = false
 	  }, 100)
-  }
+  }, false)
 
   // keyboard paddle events
   document.body.addEventListener('keydown', function (e) {
