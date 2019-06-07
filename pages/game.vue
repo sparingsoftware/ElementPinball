@@ -129,7 +129,6 @@ export default {
             width: world.bounds.max.x,
             height: world.bounds.max.y,
             wireframes: consts.WIREFRAMES,
-            // background: '/tmp/_tmp_plansza.png'
             background: 'transparent'
             // showDebug: false,
             // showBounds: true,
@@ -219,7 +218,7 @@ export default {
 
           // cheap way to keep ball from going back down the shooter lane
           if (pinball.position.x > 977 && pinball.velocity.y > 0) {
-            Matter.Body.setVelocity(pinball, { x: 0, y: -15 })
+            Matter.Body.setVelocity(pinball, { x: 0, y: -18 })
           }
 
           if (!game.isPinballBlocked) {
