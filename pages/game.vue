@@ -441,7 +441,7 @@ export default {
     left: 664px;
     width: 174px;
     animation: FloatSides 6s ease-in-out infinite;
-    animation-delay: 7s;
+    animation-delay: 5s;
   }
 }
 
