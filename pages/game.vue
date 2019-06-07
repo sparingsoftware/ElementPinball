@@ -20,9 +20,9 @@
       </span>
     </div>
     <div class="lives">
-      <img class="life" src="/img/life.png" alt="">
-      <img class="life" src="/img/life.png" alt="">
-      <img class="life" src="/img/life.png" alt="">
+      <div class="life"/>
+      <div class="life"/>
+      <div class="life"/>
     </div>
     <div ref="gameContainer" class="game-container">
       <runway class="runway"/>
@@ -335,30 +335,35 @@ export default {
 
 .lives {
   position: absolute;
-  bottom: 45px;
+  bottom: 21px;
   left: 35px;
   z-index: 2;
+  display: flex;
 
   @include media-down (md) {
-    bottom: 20px;
+    bottom: 3px;
     left: 10px;
     display: flex;
     flex-direction: column;
   }
 
   .life {
-    max-width: 50px;
-    margin-right: 5px;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    background-image: url('/svg/life.svg');
+    background-repeat: no-repeat;
+    background-position: center;
 
     @include media-down (md) {
-      max-width: 27px;
+      width: 27px;
+      height: 25px;
       margin-bottom: 5px;
       margin-right: 0;
     }
 
     &--disabled {
-      opacity: 0.8;
-      filter: grayscale(100%);
+      background-image: url('/svg/life-off.svg');
     }
   }
 }
