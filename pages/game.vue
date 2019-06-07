@@ -20,12 +20,15 @@
       </span>
     </div>
     <div class="lives">
-      <img class="life" src="/img/life.png" alt="">
-      <img class="life" src="/img/life.png" alt="">
-      <img class="life" src="/img/life.png" alt="">
+      <div class="life"/>
+      <div class="life"/>
+      <div class="life"/>
     </div>
     <div ref="gameContainer" class="game-container">
       <runway class="runway"/>
+      <img class="image image--rock-left" src="/img/rock-left.png">
+      <img class="image image--rock" src="/img/rock-right.png">
+      <img class="image image--rock-right" src="/img/rock-right.png">
       <img class="image image--half-pipe" src="/img/half-pipe.png">
     </div>
   </section>
@@ -166,9 +169,7 @@ export default {
         gameOverSound.play()
         game.$store.commit('setCurrentScore', game.score)
         setTimeout(() => {
-          if (process.browser) {
-            window.localStorage.getItem('userName') ? game.$router.push('/rank') : game.$router.push('/score')
-          }
+          game.$router.push('/score')
         }, 200)
       }
 
@@ -336,30 +337,35 @@ export default {
 
 .lives {
   position: absolute;
-  bottom: 45px;
+  bottom: 21px;
   left: 35px;
   z-index: 2;
+  display: flex;
 
   @include media-down (md) {
-    bottom: 20px;
+    bottom: 3px;
     left: 10px;
     display: flex;
     flex-direction: column;
   }
 
   .life {
-    max-width: 50px;
-    margin-right: 5px;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    background-image: url('/svg/life.svg');
+    background-repeat: no-repeat;
+    background-position: center;
 
     @include media-down (md) {
-      max-width: 27px;
+      width: 27px;
+      height: 25px;
       margin-bottom: 5px;
       margin-right: 0;
     }
 
     &--disabled {
-      opacity: 0.8;
-      filter: grayscale(100%);
+      background-image: url('/svg/life-off.svg');
     }
   }
 }
@@ -413,13 +419,48 @@ export default {
     z-index: 2;
     transform: translate(100%, 0%);
   }
+
+  &--rock {
+    top: 543px;
+    left: 369px;
+    width: 290px;
+    animation: FloatSides 6s ease-in-out infinite;
+    animation-fill-mode: both;
+  }
+
+  &--rock-left {
+    top: 591px;
+    left: 158px;
+    width: 203px;
+    animation: FloatSides 6s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+
+  &--rock-right {
+    top: 600px;
+    left: 664px;
+    width: 174px;
+    animation: FloatSides 6s ease-in-out infinite;
+    animation-delay: 5s;
+  }
+}
+
+@keyframes FloatSides {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .runway {
   position: absolute;
   bottom: 203px;
   left: calc(100% - 84px);
-  -webkit-transform: translate(-100%, 0%);
   transform: translate(-100%, 0%);
   z-index: 2;
   width: 34px;

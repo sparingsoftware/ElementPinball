@@ -55,11 +55,23 @@ export default {
 
 .btn-light {
   @include btn(true, true);
+
+  @media (max-width: 1079px) {
+    & {
+      display: none;
+    }
+  }
 }
 
 .btn-dark {
   margin-top: 0.37em;
   @include btn(false, true);
+
+  @media (max-width: 1079px) {
+    & {
+      @include btn(true, true);
+    }
+  }
 }
 
 .image {

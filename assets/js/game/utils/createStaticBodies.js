@@ -57,7 +57,8 @@ const createStaticBodies = () => {
   leftRockBound.body.render.opacity = 0
   leftRock.body.render.visible = false
   const leftRockCover = new Circle(245, 665, 40)
-  setBackground(leftRockCover, 'rock-left', { xOffset: 0.43, yOffset: 0.39 })
+  leftRockCover.body.render.visible = false
+  // setBackground(leftRockCover, 'rock-left', { xOffset: 0.43, yOffset: 0.39 })
   leftRock.body.restitution = consts.SMALL_BOUNCE // bounce
 
   const middleRock = new Path(490, 668, consts.PATHS.MIDDLE_ROCK)
@@ -65,7 +66,8 @@ const createStaticBodies = () => {
   middleRockBound.body.render.opacity = 0
   middleRock.body.render.visible = false
   const middleRockCover = new Circle(500, 660, 40)
-  setBackground(middleRockCover, 'rock-right', { xOffset: 0.45, yOffset: 0.44 })
+  middleRockCover.body.render.visible = false
+  // setBackground(middleRockCover, 'rock-right', { xOffset: 0.45, yOffset: 0.44 })
   middleRock.body.restitution = consts.SMALL_BOUNCE // bounce
 
   const rightRock = new Path(735, 678, consts.PATHS.RIGHT_ROCK)
@@ -73,7 +75,8 @@ const createStaticBodies = () => {
   rightRockBound.body.render.opacity = 0
   rightRock.body.render.visible = false
   const rightRockCover = new Circle(745, 670, 40)
-  setBackground(rightRockCover, 'rock-right', { xOffset: 0.47, yOffset: 0.44, xScale: 0.6, yScale: 0.6 })
+  rightRockCover.body.render.visible = false
+  // setBackground(rightRockCover, 'rock-right', { xOffset: 0.47, yOffset: 0.44, xScale: 0.6, yScale: 0.6 })
   rightRock.body.restitution = consts.SMALL_BOUNCE // bounce
 
   // flippers lane
