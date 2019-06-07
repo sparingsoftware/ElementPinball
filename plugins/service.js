@@ -16,7 +16,9 @@ const createService = (axios, store, error) => {
       clear: () => http.post('/clear_scores')
     },
     score: {
-      add: userData => http.post('/add_score', userData)
+      add: userData => http.post('/add_score', userData),
+      addTemp: (userScore) => http.post('/add_temp_score', userScore),
+      getTemp: (scoreId) => http.get(`/get_temp_score?scoreId=${scoreId}`)
     },
     user: {
       validate: userName => http.get(`/validate_user?user=${userName}`, { useCache: true })

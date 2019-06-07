@@ -45,22 +45,26 @@ export default {
       if (this.userName) {
         const userData = {
           user: this.userName,
-          score: this.$route.params.user || this.$store.getters.getCurrentScore || 0
+          // score: this.$route.params.user || this.$store.getters.getCurrentScore || 0
+          score: 0
         }
 
         this.$service.user.validate(this.userName).then(resp => {
           if (resp.user_exists) {
             this.error = 'Podane imię jest już zajęte, podaj inne.'
           } else {
-            this.$service.score.add(userData).then(() => {
-              if (process.browser) {
-                window.localStorage.setItem('userName', this.userName)
-              }
-              this.$router.push('/rank')
-            }).catch(error => {
-              if (error.response) {
-                this.error = 'Nie udało się zapisać wyniku, spróbuj jeszcze raz.'
-              }
+            this.$service.score.getTemp(this.$route.params.user).then(resp => {
+              userData.score = resp.score.score
+              this.$service.score.add(userData).then(() => {
+                if (process.browser) {
+                  window.localStorage.setItem('userName', this.userName)
+                }
+                this.$router.push('/rank')
+              }).catch(error => {
+                if (error.response) {
+                  this.error = 'Nie udało się zapisać wyniku, spróbuj jeszcze raz.'
+                }
+              })
             })
           }
         })

@@ -20,9 +20,12 @@ export default {
       const typeNumber = 4
       const errorCorrectionLevel = 'L'
       const qr = qrcode(typeNumber, errorCorrectionLevel)
-      qr.addData(`http://localhost:3000/user/${this.score}`)
-      qr.make()
-      code.innerHTML = qr.createSvgTag()
+
+      this.$service.score.addTemp({ score: this.score }).then(resp => {
+        qr.addData(`http://localhost:3000/user/${resp.score_id}`)
+        qr.make()
+        code.innerHTML = qr.createSvgTag()
+      })
     }
   }
 }
