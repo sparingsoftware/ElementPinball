@@ -22,7 +22,7 @@ export default {
       const qr = qrcode(typeNumber, errorCorrectionLevel)
       this.$service.score.addTemp({ score: this.score }).then(resp => {
         if (process.browser) {
-          qr.addData(`${window.location.origin}/user/${resp.score_id}`)
+          qr.addData(`https://element-pinball.panowie.pro/user/${resp.score_id}`)
           qr.make()
           code.innerHTML = qr.createSvgTag()
         }
