@@ -25,7 +25,7 @@
     "nuxt": "^2.4.5",
     "poly-decomp": "^0.3.0",
     "qrcode-generator": "^1.4.3",
-    "qs": "^6.6.0",
+    "qs": "^6.7.3",
     "raf-throttle": "^2.0.3",
     "vue-smooth-reflow": "^0.1.12"
   },
